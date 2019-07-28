@@ -19,3 +19,9 @@ body{
 .label{
     color: white;
 }
+
+.label-style{
+    font-size: 14;
+    font-style: bold;
+    color: white;
+}
