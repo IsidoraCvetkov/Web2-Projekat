@@ -12,6 +12,8 @@ import { PriceListComponent } from './price-list/price-list.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { ShceduleComponent } from './shcedule/shcedule.component';
 import { BusLocationComponent } from './bus-location/bus-location.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './auth/jwt-interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { BusLocationComponent } from './bus-location/bus-location.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
