@@ -5,14 +5,26 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { LogInComponent } from './log-in/log-in.component';
+import { HomeComponent } from './home/home.component';
+import { BusLocationComponent } from './bus-location/bus-location.component';
+import { PriceListComponent } from './price-list/price-list.component';
+import { ShceduleComponent } from './shcedule/shcedule.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { LineMeshComponent } from './line-mesh/line-mesh.component';
 
 
 const routes : Routes = [
   {path:"log-in", component: LogInComponent},
   {path:"register", component: RegisterComponent},
+  {path:"home", component: HomeComponent},
+  {path:"bus-location", component: BusLocationComponent},
+  {path:"price-list", component: PriceListComponent},
+  {path:"schedule", component: ShceduleComponent},
+  {path:"ticket", component: TicketComponent},
+  {path:"line-mesh", component : LineMeshComponent},
 
-  // {path: "", component: HomeComponent, pathMatch: "full"},
-  // {path: "**", redirectTo: "home"}
+  {path: "", component: HomeComponent, pathMatch: "full"},
+  {path: "**", redirectTo: "home"}
 ];
 
 @NgModule({
