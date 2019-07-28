@@ -9,6 +9,10 @@ namespace WebApp.Models
 {
     public class Line
     {
-
+        [Key]
+        public int IdLine { get; set; }
+        public string Number { get; set; }
+        public RouteType RouteType { get; set; }
+        public List<Station> Stations { get; set; }
     }
 }

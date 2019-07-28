@@ -11,7 +11,10 @@ namespace WebApp.Persistence.UnitOfWork
     public class DemoUnitOfWork : IUnitOfWork
     {
         private readonly DbContext _context;
-      
+
+        [Dependency]
+        public ILocationRepository Locations { get; set; }
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;

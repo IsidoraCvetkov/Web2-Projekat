@@ -9,6 +9,10 @@ namespace WebApp.Models
 {
     public class Price
     {
-
+        [Key]
+        public int IdPrice { get; set; }
+        public TicketType Type { get; set; }
+        public double Value { get; set; }
+        public List<PriceList> Pricelists { get; set; }
     }
 }

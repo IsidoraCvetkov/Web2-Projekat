@@ -8,6 +8,10 @@ namespace WebApp.Models
 {
     public class Location
     {
-
+        [Key]
+        public int IdLocation { get; set; }
+        public string Address { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 }

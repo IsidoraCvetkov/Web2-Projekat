@@ -10,6 +10,13 @@ namespace WebApp.Models
 {
     public class Schadule
     {
-
+        [Key]
+        public int IdSchadule { get; set; }
+        public RouteType Type { get; set; }
+        public DayType Day { get; set; }
+        public Line Line { get; set; }
+        public string DepartureTime { get; set; } //vreme polaska
+        [ForeignKey("Line")]
+        public int IdLine { get; set; }
     }
 }

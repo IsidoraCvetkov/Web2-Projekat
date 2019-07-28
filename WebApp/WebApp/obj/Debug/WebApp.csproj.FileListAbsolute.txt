@@ -148,3 +148,5 @@ C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.cs
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.pdb
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.CreateModel.resources
+C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.CreateNewModel.resources
+C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddedLocation.resources
