@@ -6,7 +6,8 @@
 			    	<h3 class="panel-title">Registration</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+                        <!-- [formGroup]="registerForm" -->
+			    	<form (submit)="register()" enctype="multipart/form-data" accept-charset="UTF-8">
                     <fieldset>
                         <div class="form-group">
                             <div class="label-style">Name:</div>
@@ -53,8 +54,13 @@
                                 </div>
                             </div>	
                         <input class="btn btn-lg btn-success btn-block" type="submit" value="Register">
+                            
+                        <br>
 			    	    </fieldset>
                     </form>
+                    <!-- <form (ngSubmit)="logout()" enctype="multipart/form-data">
+<button type="submit"  [disabled]="!registerForm.valid">Register</button>
+</form> -->
 			    </div>
 			</div>
 		</div>

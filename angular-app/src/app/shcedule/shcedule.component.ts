@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Line } from 'src/app/models/line';
 
 @Component({
   selector: 'app-shcedule',
@@ -7,9 +9,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShceduleComponent implements OnInit {
 
-  constructor() { }
+  public typeOfDayForm: FormGroup;
+  public typeOfLineForm: FormGroup;
+  public lineForm: FormGroup;
+  public ScheduleForm: FormGroup;
 
-  ngOnInit() {
+  public lines: Line[];
+  public times: string;
+  public parser:string[];
+  public message: string;
+  public empty: boolean;
+
+
+  TypeLine:Array<Object> = [
+    {name: "City"},
+    {name: "Village"},
+];
+
+TypeDay:Array<Object> = [
+  {name: "Work day"},
+  {name: "Saturday"},
+  {name: "Sunday"},
+];
+
+  constructor() { 
   }
 
+  async ngOnInit() {
+    
+  }
+
+  public async typeSelected(){
+    let typeOfLine = this.ScheduleForm.controls['line'].value;
+  }
+
+  public async ScheduleShow(){
+  }
 }

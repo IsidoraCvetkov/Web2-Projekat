@@ -14,6 +14,8 @@ import { ShceduleComponent } from './shcedule/shcedule.component';
 import { BusLocationComponent } from './bus-location/bus-location.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './auth/jwt-interceptor';
+import { LogOutComponent } from './log-out/log-out.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { JwtInterceptor } from './auth/jwt-interceptor';
     PriceListComponent,
     TicketComponent,
     ShceduleComponent,
-    BusLocationComponent
+    BusLocationComponent,
+    LogOutComponent,
+    ProfileViewComponent
   ],
   imports: [
     BrowserModule,

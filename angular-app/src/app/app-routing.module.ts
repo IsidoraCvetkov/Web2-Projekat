@@ -11,7 +11,8 @@ import { PriceListComponent } from './price-list/price-list.component';
 import { ShceduleComponent } from './shcedule/shcedule.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { LineMeshComponent } from './line-mesh/line-mesh.component';
-
+import { LogOutComponent } from './log-out/log-out.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 const routes : Routes = [
   {path:"log-in", component: LogInComponent},
@@ -22,9 +23,11 @@ const routes : Routes = [
   {path:"schedule", component: ShceduleComponent},
   {path:"ticket", component: TicketComponent},
   {path:"line-mesh", component : LineMeshComponent},
+  {path:"log-out", component : LogOutComponent},
+  {path:"profile", component : ProfileViewComponent},
 
-  {path: "", component: HomeComponent, pathMatch: "full"},
-  {path: "**", redirectTo: "home"}
+  // {path: "", component: HomeComponent, pathMatch: "full"},
+  // {path: "**", redirectTo: "home"}
 ];
 
 @NgModule({
