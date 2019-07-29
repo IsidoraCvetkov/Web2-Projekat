@@ -150,3 +150,4 @@ C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.pd
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.CreateModel.resources
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.CreateNewModel.resources
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddedLocation.resources
+C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.NewMigration.resources

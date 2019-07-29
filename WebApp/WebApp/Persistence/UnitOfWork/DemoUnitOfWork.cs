@@ -15,6 +15,18 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public ILocationRepository Locations { get; set; }
 
+        [Dependency]
+        public ILineRepository Lines { get; set; }
+        [Dependency]
+        public IStationRepository Stations { get; set; }
+        [Dependency]
+        public ITicketRepository Tickets { get; set; }
+        [Dependency]
+        public IPriceRepository Prices { get; set; }
+        [Dependency]
+        public IPriceListRepository PriceLists { get; set; }
+        [Dependency]
+        public ISchaduleRepository Schadules { get; set; }
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;
