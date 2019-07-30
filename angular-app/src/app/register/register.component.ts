@@ -5,6 +5,7 @@ import { FormGroup, NgControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { RegisterService } from '../services/registerService';
 
 @Component({
   selector: 'app-register',
@@ -47,7 +48,7 @@ export class RegisterComponent implements OnInit {
     IDtypeOfUser:[],
   });
 
-  constructor(public router: Router, public fb: FormBuilder) {
+  constructor(public router: Router, public fb: FormBuilder,public registerService: RegisterService,) {
     this.canUpload=false;
     this.message="";
    }
@@ -64,6 +65,22 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.router.navigate(["/home"]);
+
+    if(this.registerForm.controls['Password'].value==this.registerForm.controls['ConfirmPassword'].value){
+      if(this.registerForm.controls['IDtypeOfUser'].value!=null){
+        this.message="";
+    this.registerForm.controls['ImageUrl'].setValue(this.base64textString);
+    this.registerService.registrate(this.registerForm.value).subscribe((data) => {
+      this.message = data;
+      
+    });
+  }else{
+    this.message="Please tell us what you are..";
+
+  }
+  }else{
+    this.message="Passwords does not match.";
+  }
   }
 
   private base64textString:string="";

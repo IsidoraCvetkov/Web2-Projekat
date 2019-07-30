@@ -12,12 +12,12 @@ import { PriceListComponent } from './price-list/price-list.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { ShceduleComponent } from './shcedule/shcedule.component';
 import { BusLocationComponent } from './bus-location/bus-location.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpHandler} from '@angular/common/http';
 import { JwtInterceptor } from './auth/jwt-interceptor';
 import { LogOutComponent } from './log-out/log-out.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { FormBuilder, FormsModule } from '@angular/forms';
-import { Validators, ReactiveFormsModule} from '@angular/forms'; //dodala
+import { Validators, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { Validators, ReactiveFormsModule} from '@angular/forms'; //dodala
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule //dodala
+    ReactiveFormsModule, //dodala
+    HttpClientModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, FormBuilder],
   bootstrap: [AppComponent]

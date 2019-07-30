@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, ReactiveFormsModule} from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
+
 import { FormGroup, NgControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -11,16 +14,32 @@ import { FormsModule } from '@angular/forms';
 })
 export class LogInComponent implements OnInit {
 
+  message: string;
+
   logInForm = this.fb.group({
     Email: ['', Validators.required],
     Password: ['', Validators.required]
   });
-  constructor(public fb: FormBuilder) { }
-
-  ngOnInit() {
+  constructor(public authService: AuthService, public router: Router, private fb: FormBuilder) {
+    this.setMessage();
   }
 
-  login(){
+  setMessage() {
+    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
+  }
 
+  login() {
+    this.authService.login(this.logInForm.value).subscribe((data) => {
+      console.log(data);
+      this.setMessage();
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.setMessage();
+  }
+
+  ngOnInit() {
   }
 }
