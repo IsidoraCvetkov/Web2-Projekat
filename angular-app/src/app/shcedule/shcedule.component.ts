@@ -26,13 +26,19 @@ export class ShceduleComponent implements OnInit {
     {name: "Village"},
 ];
 
-TypeDay:Array<Object> = [
-  {name: "Work day"},
-  {name: "Saturday"},
-  {name: "Sunday"},
-];
+  TypeDay:Array<Object> = [
+    {name: "Work day"},
+    {name: "Saturday"},
+    {name: "Sunday"},
+  ];
 
-  constructor() { 
+  constructor(public fb: FormBuilder) { 
+    this.ScheduleForm = this.fb.group({
+      line: ['', Validators.required],
+      day: ['', Validators.required],
+      number: ['', Validators.required]
+  
+    });
   }
 
   async ngOnInit() {

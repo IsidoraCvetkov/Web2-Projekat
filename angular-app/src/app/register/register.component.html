@@ -7,35 +7,35 @@
 			 	</div>
 			  	<div class="panel-body">
                         <!-- [formGroup]="registerForm" -->
-			    	<form (submit)="register()" enctype="multipart/form-data" accept-charset="UTF-8">
+			    	<form [formGroup]="registerForm" (ngSubmit)="register()" enctype="multipart/form-data" accept-charset="UTF-8">
                     <fieldset>
                         <div class="form-group">
                             <div class="label-style">Name:</div>
-                            <input class="form-control" placeholder="Enter your name" name="name" type="text">
+                            <input class="form-control" placeholder="Enter your name" formControlName="Name" type="text">
                         </div>
                         <div class="form-group">
                             <div class="label-style">Surname:</div>
-                            <input class="form-control" placeholder="Enter your surname" name="surname" type="text">
+                            <input class="form-control" placeholder="Enter your surname" formControlName="Surname" type="text">
                         </div>
                         <div class="form-group">
                                 <div class="label-style">Address:</div>
-                                <input class="form-control" placeholder="Enter your address" name="address" type="text">
+                                <input class="form-control" placeholder="Enter your address" formControlName="Address" type="text">
                         </div>
                         <div class="form-group">
                                 <div class="label-style">Date of birth:</div>
-                                <input class="form-control" placeholder="Enter your date of birth" name="birthday" type="datetime">
+                                <input class="form-control" placeholder="Enter your date of birth" formControlName="Birthday" type="datetime">
                             </div>
 			    	  	<div class="form-group">
                             <div class="label-style">E-mail:</div>
-			    		    <input class="form-control" placeholder="Enter your E-mail" name="email" type="text">
+			    		    <input class="form-control" placeholder="Enter your E-mail" formControlName="Email" type="email">
 			    		</div>
 			    		<div class="form-group">
                             <div class="label-style">Password:</div>
-			    			<input class="form-control" placeholder="Enter your password" name="password" type="password" value="">
+			    			<input class="form-control" placeholder="Enter your password" formControlName="Password" type="password" value="">
                         </div>
                         <div class="form-group">
                                 <div class="label-style">Password confirm:</div>
-                                <input class="form-control" placeholder="Enter your password" name="password" type="password" value="">
+                                <input class="form-control" placeholder="Enter your password" formControlName="ConfirmPassword" type="password" value="">
                         </div>
                         <div class="form-group">
                             <div class="label-style">You are:</div>

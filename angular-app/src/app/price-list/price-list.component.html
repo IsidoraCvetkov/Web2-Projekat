@@ -6,23 +6,23 @@
 			    	<h3 class="panel-title">Price list</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
-                    <fieldset>
-			    	  	<div class="form-group">
+			    	<!-- <form [formGroup]="priceListForm" (ngSubmit)="priceList()" enctype="multipart/form-data" accept-charset="UTF-8">
+                    <fieldset> -->
+			    	  	<div>
                             <div class="label-style">Type of ticket:</div>
                             <select >
                                 <option *ngFor="let item of dataTicket" >{{item.name}}</option>
                               </select>
 			    		</div>
-			    		<div class="form-group">
+			    		<div>
                             <div class="label-style">Type of passanger:</div>
                             <select >
                                 <option *ngFor="let item1 of dataUser" >{{item1.name}}</option>
                               </select>
                         </div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Show">
-			    	</fieldset>
-			      	</form>
+			    		<button class="btn btn-lg btn-success btn-block">Show</button> 
+			    	<!-- </fieldset>
+			      	</form> -->
 			    </div>
 			</div>
 		</div>

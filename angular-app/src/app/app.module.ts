@@ -16,6 +16,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './auth/jwt-interceptor';
 import { LogOutComponent } from './log-out/log-out.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { FormBuilder, FormsModule } from '@angular/forms';
+import { Validators, ReactiveFormsModule} from '@angular/forms'; //dodala
 
 @NgModule({
   declarations: [
@@ -34,9 +36,10 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule //dodala
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
