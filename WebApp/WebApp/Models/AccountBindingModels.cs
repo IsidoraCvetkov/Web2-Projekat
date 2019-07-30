@@ -54,11 +54,19 @@ namespace WebApp.Models
 
         [Required]
         [Display(Name = "BirthdayDate")]
-        public string BirthdayDate { get; set; }
+        public DateTime BirthdayDate { get; set; }
 
         [Required]
         [Display(Name = "PassengerType")]
         public PassengerType PassengerType { get; set; }
+
+        [Required]
+        [Display(Name = "State")]
+        public VerificationType State { get; set; }
+
+        [Required]
+        [Display(Name = "Picture")]
+        public string Picture { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

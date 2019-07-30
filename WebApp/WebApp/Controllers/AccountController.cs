@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -25,6 +29,7 @@ namespace WebApp.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        Random r = new Random();
 
         public AccountController()
         {
@@ -318,26 +323,148 @@ namespace WebApp.Controllers
             return logins;
         }
 
+        //// POST api/Account/Register
+        //[AllowAnonymous]
+        //[Route("Register")]
+        //public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+
+        //    IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+        //    if (!result.Succeeded)
+        //    {
+        //        return GetErrorResult(result);
+        //    }
+
+        //    return Ok();
+        //}
+
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register([FromBody]RegisterBindingModel model)
         {
+            string imgUrl = "";
+            DateTime oldestMan = new DateTime(1900, 1, 1);
+
+
+            string res = "";
+
+            if (model.BirthdayDate > DateTime.Today || model.BirthdayDate < oldestMan)
+            {
+                res += "Invalid date. ";
+            }
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                foreach (var r in ModelState.Values)
+                {
+                    foreach (var e in r.Errors)
+                    {
+                        res += e.ErrorMessage + ". ";
+                    }
+                }
+                return BadRequest(res);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            if (model.PassengerType == Enums.PassengerType.Regular)
+            {
+                model.PassengerType = Enums.PassengerType.Regular;
+            }
+            else
+            {
+
+                if (model.Picture == "")
+                    model.State = Enums.VerificationType.Process;
+
+                if (model.Picture != "")
+                    model.State = Enums.VerificationType.Process;
+
+                imgUrl = MakePath(model);
+
+            }
+
+            var user = new ApplicationUser()
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                Name = model.Name,
+                LastName = model.Lastname,
+                BirthdayDate = model.BirthdayDate,
+                Address = model.Address,
+                Picture = imgUrl,
+                State = model.State,
+                PassengerType = model.PassengerType
+            };
+
+            if (res != "")
+            {
+                return BadRequest(res);
+            }
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                foreach (var r in result.Errors)
+                {
+                    res += r;
+                }
+                return BadRequest(res);
             }
+            UserManager.AddToRole(user.Id, "AppUser");
+            SendMail(model.Email, $"Your varification status of profile is : " + model.State.ToString() + ".");
 
             return Ok();
+        }
+
+        protected void SendMail(string toEmail, string content)
+        {
+            MailMessage mail = new MailMessage("isidora.cvetkov@gmail.com", toEmail);
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = true;
+            client.Credentials = new NetworkCredential("isidora.cvetkov@gmail.com", "isidoravranjee3");
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Host = "smtp.gmail.com";
+            mail.Subject = "Public City Transport Serbia";
+            mail.Body = content;
+            client.Send(mail);
+        }
+
+        public string MakePath(RegisterBindingModel user)
+        {
+
+            string imgUrl = "";
+            if (user.Picture != "" && user.Picture != null)
+            {
+                byte[] imageBytes = Convert.FromBase64String(user.Picture);
+                // Convert byte[] to Image
+                using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+                {
+                    Image image = Image.FromStream(ms, true);
+                    // image = resizeImage(image, new Size(500, 500));
+                    try
+                    {
+                        image.Save(@"C:\Users\isidora.cvetkov\Desktop\UserImages\" + user.Email + ".jpg");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    imgUrl = @"C:\Users\isidora.cvetkov\Desktop\UserImages\" + user.Email + ".jpg";
+                }
+            }
+
+            return imgUrl;
+
         }
 
         // POST api/Account/RegisterExternal

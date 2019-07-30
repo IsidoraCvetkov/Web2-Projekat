@@ -44,8 +44,8 @@ export class RegisterComponent implements OnInit {
     Surname: ['', Validators.required],
     Birthday:['',Validators.required],
     Address: ['', Validators.required],
-    ImageUrl: [''],
-    IDtypeOfUser:[],
+    Picture: [''],
+    PassengerType:[],
   });
 
   constructor(public router: Router, public fb: FormBuilder,public registerService: RegisterService,) {
@@ -64,12 +64,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    this.router.navigate(["/home"]);
+    //this.router.navigate(["/home"]);
 
     if(this.registerForm.controls['Password'].value==this.registerForm.controls['ConfirmPassword'].value){
-      if(this.registerForm.controls['IDtypeOfUser'].value!=null){
+      if(this.registerForm.controls['PassengerType'].value!=null){
         this.message="";
-    this.registerForm.controls['ImageUrl'].setValue(this.base64textString);
+    this.registerForm.controls['Picture'].setValue(this.base64textString);
     this.registerService.registrate(this.registerForm.value).subscribe((data) => {
       this.message = data;
       

@@ -28,7 +28,7 @@ export class LogInComponent implements OnInit {
     this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
   }
 
-  login() {
+  logIn() {
     this.authService.login(this.logInForm.value).subscribe((data) => {
       console.log(data);
       this.setMessage();

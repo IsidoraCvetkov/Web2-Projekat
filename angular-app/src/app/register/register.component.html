@@ -40,15 +40,15 @@
                         <div class="form-group">
                             <div class="label-style">You are:</div>
                             <div class="label-style">
-                              <input (click)="hit()" type="radio" formControlName="IDtypeOfUser" value="1">&nbsp;Student
-                              <input (click)="hit()" type="radio" formControlName="IDtypeOfUser" value="2">&nbsp;Pensioner
-                              <input (click)="inHit()" type="radio" formControlName="IDtypeOfUser" value="3">&nbsp;Regular
+                              <input (click)="hit()" type="radio" formControlName="PassengerType" value="1">&nbsp;Student
+                              <input (click)="hit()" type="radio" formControlName="PassengerType" value="2">&nbsp;Pensioner
+                              <input (click)="unHit()" type="radio" formControlName="PassengerType" value="3">&nbsp;Regular
                             </div>
                         </div>
                         <div class="form-group" *ngIf="canUpload">
                                 <div class="label-style">Document:</div>
                                 <div class="label-style">
-                                    <label formControlName="ImageUrl" for="filePicker">Choose or drag a file:</label><br>
+                                    <label formControlName="Picture" for="filePicker">Choose or drag a file:</label><br>
                                     <input type="file" id="filePicker" (change)="handleFileSelect($event)">
                                     <img [src]="mySrc" />
                                 </div>
