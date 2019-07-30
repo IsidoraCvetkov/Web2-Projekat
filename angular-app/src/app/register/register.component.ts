@@ -47,12 +47,44 @@ export class RegisterComponent implements OnInit {
     IDtypeOfUser:[],
   });
 
-  constructor(public router: Router, public fb: FormBuilder) { }
+  constructor(public router: Router, public fb: FormBuilder) {
+    this.canUpload=false;
+    this.message="";
+   }
 
   ngOnInit() {
     
   }
+  hit(){
+    this.canUpload=true;
+  }  
+  unHit(){
+    this.canUpload=false;
+  }
+
   register(){
     this.router.navigate(["/home"]);
   }
+
+  private base64textString:string="";
+  
+  handleFileSelect(evt){
+      var files = evt.target.files;
+      var file = files[0];
+    
+    if (files && file) {
+        var reader = new FileReader();
+
+        reader.onload =this._handleReaderLoaded.bind(this);
+
+        reader.readAsBinaryString(file);
+    }
+  }
+  
+  _handleReaderLoaded(readerEvt) {
+     var binaryString = readerEvt.target.result;
+            this.base64textString= btoa(binaryString);
+            alert(btoa(binaryString));
+            this.mySrc="data:image/png;base64," + this.base64textString;
+    }
 }
