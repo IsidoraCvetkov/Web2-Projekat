@@ -18,6 +18,7 @@ import { LogOutComponent } from './log-out/log-out.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { Validators, ReactiveFormsModule} from '@angular/forms';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { Validators, ReactiveFormsModule} from '@angular/forms';
     ShceduleComponent,
     BusLocationComponent,
     LogOutComponent,
-    ProfileViewComponent
+    ProfileViewComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
