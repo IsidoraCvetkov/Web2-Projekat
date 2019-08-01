@@ -15,6 +15,9 @@ import { LogOutComponent } from './log-out/log-out.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { ValidateProfileComponent } from './validate-profile/validate-profile.component';
 import { ValidateTicketComponent } from './validate-ticket/validate-ticket.component';
+import { AdminLineMeshComponent } from './admin-line-mesh/admin-line-mesh.component';
+import { AdminScheduleComponent } from './admin-schedule/admin-schedule.component';
+import { AdminPriceListComponent } from './admin-price-list/admin-price-list.component';
 
 const routes : Routes = [
   {path:"log-in", component: LogInComponent},
@@ -28,7 +31,10 @@ const routes : Routes = [
   {path:"log-out", component : LogOutComponent},
   {path:"profile", component : ProfileViewComponent},
   {path:"validate-profile", component : ValidateProfileComponent},
-  {path:"validate-ticket", component : ValidateTicketComponent}
+  {path:"validate-ticket", component : ValidateTicketComponent},
+  {path:"admin-line-mesh", component : AdminLineMeshComponent},
+  {path:"admin-schedule", component : AdminScheduleComponent},
+  {path:"admin-price-list", component : AdminPriceListComponent}
 
   // {path: "", component: HomeComponent, pathMatch: "full"},
   // {path: "**", redirectTo: "home"}

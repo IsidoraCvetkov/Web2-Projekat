@@ -61,18 +61,40 @@
         </a>
       </li>
       <!-- Kontroler -->
-      <li *ngIf="!isController" class="nav-item">
+      <li *ngIf="isController" class="nav-item">
         <a class="nav-link" routerLink="/validate-profile">
           <i class="fa fa-users">
           </i>
           Validate profiles
         </a>
       </li>
-      <li *ngIf="!isController" class="nav-item">
+      <li *ngIf="isController" class="nav-item">
         <a class="nav-link" routerLink="/validate-ticket">
           <i class="fa fa-ticket">
           </i>
           Validate tickets
+        </a>
+      </li>
+      <!-- Admin -->
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/admin-schedule">
+          <i class="fa fa-calendar">
+          </i>
+          Update schedule
+        </a>
+      </li>
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/admin-line-mesh">
+          <i class="fa fa-bus">
+          </i>
+          Update line mesh
+        </a>
+      </li>
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/admin-price-list">
+          <i class="fa fa-file-text">
+          </i>
+          Update price list
         </a>
       </li>
     </ul>

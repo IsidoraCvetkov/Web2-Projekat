@@ -22,6 +22,10 @@ import { MapComponent } from './map/map.component';
 import { UnregistredComponent } from './unregistred/unregistred.component';
 import { ValidateProfileComponent } from './validate-profile/validate-profile.component';
 import { ValidateTicketComponent } from './validate-ticket/validate-ticket.component';
+import { AdminLineMeshComponent } from './admin-line-mesh/admin-line-mesh.component';
+import { AdminScheduleComponent } from './admin-schedule/admin-schedule.component';
+import { AdminPriceListComponent } from './admin-price-list/admin-price-list.component';
+import { AdminStationComponent } from './admin-station/admin-station.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { ValidateTicketComponent } from './validate-ticket/validate-ticket.compo
     MapComponent,
     UnregistredComponent,
     ValidateProfileComponent,
-    ValidateTicketComponent
+    ValidateTicketComponent,
+    AdminLineMeshComponent,
+    AdminScheduleComponent,
+    AdminPriceListComponent,
+    AdminStationComponent
   ],
   imports: [
     BrowserModule,
