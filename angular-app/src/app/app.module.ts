@@ -20,6 +20,8 @@ import { FormBuilder, FormsModule } from '@angular/forms';
 import { Validators, ReactiveFormsModule} from '@angular/forms';
 import { MapComponent } from './map/map.component';
 import { UnregistredComponent } from './unregistred/unregistred.component';
+import { ValidateProfileComponent } from './validate-profile/validate-profile.component';
+import { ValidateTicketComponent } from './validate-ticket/validate-ticket.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { UnregistredComponent } from './unregistred/unregistred.component';
     LogOutComponent,
     ProfileViewComponent,
     MapComponent,
-    UnregistredComponent
+    UnregistredComponent,
+    ValidateProfileComponent,
+    ValidateTicketComponent
   ],
   imports: [
     BrowserModule,

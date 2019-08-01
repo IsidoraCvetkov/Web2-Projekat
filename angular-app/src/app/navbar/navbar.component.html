@@ -17,6 +17,7 @@
           Home
           </a>
       </li>
+      <!-- Registrovani korisnik -->
       <li *ngIf="isRegistrated" class="nav-item">
         <a class="nav-link" routerLink="/profile">
           <i class="fa fa-user">
@@ -24,39 +25,54 @@
           Profile
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="isRegistrated || isUnregistrated" class="nav-item">
         <a class="nav-link" routerLink="/schedule">
           <i class="fa fa-calendar">
           </i>
           Schedule
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="isRegistrated || isUnregistrated" class="nav-item">
         <a class="nav-link" routerLink="/line-mesh">
           <i class="fa fa-bus">
           </i>
           Line mesh
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="isRegistrated || isUnregistrated" class="nav-item">
         <a class="nav-link" routerLink="/bus-location">
           <i class="fa fa-globe">
           </i>
           Bus location
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="isRegistrated || isUnregistrated" class="nav-item">
         <a class="nav-link" routerLink="/price-list">
           <i class="fa fa-file-text">
           </i>
           Price list
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="isRegistrated || isUnregistrated" class="nav-item">
         <a class="nav-link" routerLink="/ticket">
           <i class="fa fa-ticket">
           </i>
           Tickets
+        </a>
+      </li>
+      <!-- Kontroler -->
+      <li *ngIf="!isController" class="nav-item">
+        <a class="nav-link" routerLink="/validate-profile">
+          <i class="fa fa-users">
+          </i>
+          Validate profiles
+        </a>
+      </li>
+      <li *ngIf="!isController" class="nav-item">
+        <a class="nav-link" routerLink="/validate-ticket">
+          <i class="fa fa-ticket">
+          </i>
+          Validate tickets
         </a>
       </li>
     </ul>
