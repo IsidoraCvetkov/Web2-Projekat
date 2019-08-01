@@ -18,7 +18,8 @@ namespace WebApp.Models
         {
             Process,
             Accepted,
-            Rejected
+            Rejected,
+            Invalid
         }
 
         public enum RouteType

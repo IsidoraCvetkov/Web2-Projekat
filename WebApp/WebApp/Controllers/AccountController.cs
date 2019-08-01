@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
@@ -386,7 +387,6 @@ namespace WebApp.Controllers
                     model.State = Enums.VerificationType.Process;
 
                 imgUrl = MakePath(model);
-
             }
 
             var user = new ApplicationUser()
@@ -465,6 +465,154 @@ namespace WebApp.Controllers
 
             return imgUrl;
 
+        }
+
+        [Authorize(Roles = "AppUser")]
+        [Route("UpdateUser")]
+        public IHttpActionResult PutUser([FromBody]RegisterBindingModel user)
+        {
+            string rez = "";
+            ApplicationUser app = UserManager.FindByEmail(user.ConfirmPassword);
+            if (app != null)
+            {
+                app.Name = user.Name;
+                app.LastName = user.Lastname;
+                app.Email = user.Email;
+                app.Address = user.Address;
+                app.UserName = user.Email;
+                if (!user.Picture.Equals(""))
+                {
+                    app.State = Enums.VerificationType.Process;
+                    string imgUrl = MakePath(user); //Moja fja
+                    app.Picture = imgUrl;
+                }
+                else
+                {
+                    if (app.Picture != "")
+                    {
+
+                    }
+                    else
+                    {
+                        app.State = Enums.VerificationType.Invalid;
+                    }
+                }
+            }
+            IdentityResult res = UserManager.Update(app);
+
+            if (!res.Succeeded)
+            {
+                foreach (var r in res.Errors)
+                {
+                    rez += r;
+                }
+                return BadRequest(rez);
+            }
+            else
+            {
+
+                return Ok("ok");
+            }
+
+
+        }
+
+        public string MakeImg(string imgUrl)
+        {
+            string base64String = "";
+
+            if (imgUrl != "" && imgUrl != null)
+            {
+                Image image = Image.FromFile(imgUrl);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    // Convert Image to byte[]
+                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    byte[] imageBytes = ms.ToArray();
+
+                    // Convert byte[] to base 64 string
+                    base64String = Convert.ToBase64String(imageBytes);
+                }
+            }
+            return base64String;
+        }
+
+        [Authorize(Roles = "Controller")]
+        [Route("Validate")]
+        public IHttpActionResult PutValidate([FromBody]RegisterBindingModel user)
+        {
+
+            ApplicationUser app = UserManager.FindByEmail(user.Email);
+            app.State = user.State;
+            IdentityResult res = UserManager.Update(app);
+
+            if (!res.Succeeded)
+                return BadRequest();
+            else
+            {
+                SendMail(app.Email, $"Controller has checked your profile! {Environment.NewLine} Your varification status of profile is : " + app.State + ".");
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+
+        }
+
+
+        [Authorize(Roles = "Controller")]
+        [Route("GetUsers")]
+        public List<RegisterBindingModel> Get()
+        {
+            List<RegisterBindingModel> users = new List<RegisterBindingModel>();
+
+            users = UserManager.Users.Where(v => v.Picture != "" && (v.State == Enums.VerificationType.Invalid || v.State == Enums.VerificationType.Process)).Select(u => new RegisterBindingModel() { Name = u.Name, Lastname = u.LastName, Picture = u.Picture, Email = u.Email, State = u.State }).ToList();
+
+            foreach (var u in users)
+            {
+                u.Picture = MakeImg(u.Picture);
+            }
+
+
+            return users;
+        }
+
+
+        [Authorize(Roles = "AppUser")]
+        [Route("UserInformation")]
+        public RegisterBindingModel GetUser(string email)
+        {
+            var email1 = Request.GetOwinContext().Authentication.User.Identity.Name;
+
+            ApplicationUser app = UserManager.FindByEmail(email);
+            string base64String = "";
+
+            RegisterBindingModel rbm = new RegisterBindingModel();
+
+            if (app.Picture != "" && app.Picture != null)
+            {
+                Image image = Image.FromFile(app.Picture);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    // Convert Image to byte[]
+                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    byte[] imageBytes = ms.ToArray();
+
+                    // Convert byte[] to base 64 string
+                    base64String = Convert.ToBase64String(imageBytes);
+                }
+            }
+            if (app != null)
+            {
+                rbm.Name = app.Name;
+                rbm.Lastname = app.LastName;
+                rbm.Address = app.Address;
+                rbm.BirthdayDate = app.BirthdayDate;
+                rbm.Email = app.Email;
+                rbm.State = app.State;
+                rbm.Picture = base64String;
+                rbm.PassengerType = app.PassengerType;
+                return rbm;
+
+            }
+            return rbm;
         }
 
         // POST api/Account/RegisterExternal

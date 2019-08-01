@@ -18,11 +18,11 @@ This is a very simple parallax effect achieved by simple CSS 3 multiple backgrou
                     <fieldset>
 			    	  	<div class="form-group">
 							<div class="label-style">E-mail:</div>
-			    		    <input class="form-control" placeholder="Enter your E-mail" formControlName="Email" type="email">
+			    		    <input class="form-control" data-error="Please enter your emial" placeholder="Enter your E-mail" formControlName="Email" type="email" required>
 			    		</div>
 			    		<div class="form-group">
 							<div class="label-style">Password:</div>
-			    			<input class="form-control" placeholder="Enter your password" formControlName="Password" type="password" value="">
+			    			<input class="form-control" placeholder="Enter your password" formControlName="Password" type="password" value="" required>
 			    		</div>
 			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
 			    	</fieldset>
