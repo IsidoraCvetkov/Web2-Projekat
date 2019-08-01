@@ -19,6 +19,7 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { Validators, ReactiveFormsModule} from '@angular/forms';
 import { MapComponent } from './map/map.component';
+import { UnregistredComponent } from './unregistred/unregistred.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MapComponent } from './map/map.component';
     BusLocationComponent,
     LogOutComponent,
     ProfileViewComponent,
-    MapComponent
+    MapComponent,
+    UnregistredComponent
   ],
   imports: [
     BrowserModule,
