@@ -6,7 +6,7 @@ export class RegistrateUser {
     LastName: string;
     BirthdayDate: string;
     Address: string;
-    State: string;
+    State: number;
     Picture: string;
     PassengerType:number;
     }

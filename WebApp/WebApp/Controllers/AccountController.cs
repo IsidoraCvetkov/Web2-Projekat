@@ -325,52 +325,30 @@ namespace WebApp.Controllers
         }
 
         //// POST api/Account/Register
-        //[AllowAnonymous]
-        //[Route("Register")]
-        //public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
-        //    IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
-
-        //    return Ok();
-        //}
-
-        // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register([FromBody]RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             string imgUrl = "";
             DateTime oldestMan = new DateTime(1900, 1, 1);
 
-
             string res = "";
+            //if (model.BirthdayDate > DateTime.Today || model.BirthdayDate < oldestMan)
+            //{
+            //    res += "Invalid date. ";
+            //}
 
-            if (model.BirthdayDate > DateTime.Today || model.BirthdayDate < oldestMan)
-            {
-                res += "Invalid date. ";
-            }
             if (!ModelState.IsValid)
             {
-                foreach (var r in ModelState.Values)
-                {
-                    foreach (var e in r.Errors)
-                    {
-                        res += e.ErrorMessage + ". ";
-                    }
-                }
-                return BadRequest(res);
+                //foreach (var r in ModelState.Values)
+                //{
+                //    foreach (var e in r.Errors)
+                //    {
+                //        res += e.ErrorMessage + ". ";
+                //    }
+                //}
+                //return BadRequest(res);
+                return BadRequest(ModelState);
             }
 
             if (model.PassengerType == Enums.PassengerType.Regular)
@@ -379,12 +357,15 @@ namespace WebApp.Controllers
             }
             else
             {
-
-                if (model.Picture == "")
+                if (model.Picture == "nema slike")
+                {
                     model.State = Enums.VerificationType.Process;
+                }
 
                 if (model.Picture != "")
+                {
                     model.State = Enums.VerificationType.Process;
+                }
 
                 imgUrl = MakePath(model);
             }
@@ -408,17 +389,19 @@ namespace WebApp.Controllers
             }
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
+            
             if (!result.Succeeded)
             {
-                foreach (var r in result.Errors)
-                {
-                    res += r;
-                }
-                return BadRequest(res);
+                //foreach (var r in result.Errors)
+                //{
+                //    res += r;
+                //}
+                //return BadRequest(res);
+                return GetErrorResult(result);
             }
+
             UserManager.AddToRole(user.Id, "AppUser");
-            SendMail(model.Email, $"Your varification status of profile is : " + model.State.ToString() + ".");
+            //SendMail(model.Email, $"Your varification status of profile is : " + model.State.ToString() + ".");
 
             return Ok();
         }

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { RegisterService } from '../services/registerService';
+import { getLocaleDateTimeFormat } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -41,11 +42,12 @@ export class RegisterComponent implements OnInit {
     Password: ['', Validators.required],
     ConfirmPassword: ['', Validators.required],
     Name: ['', Validators.required],
-    Surname: ['', Validators.required],
-    Birthday:['',Validators.required],
+    LastName: ['', Validators.required],
+    BirthdayDate:['',Validators.required],
     Address: ['', Validators.required],
     Picture: [''],
     PassengerType:[],
+    State:[],
   });
 
   constructor(public router: Router, public fb: FormBuilder,public registerService: RegisterService,) {
@@ -69,18 +71,25 @@ export class RegisterComponent implements OnInit {
     if(this.registerForm.controls['Password'].value==this.registerForm.controls['ConfirmPassword'].value){
       if(this.registerForm.controls['PassengerType'].value!=null){
         this.message="";
-    this.registerForm.controls['Picture'].setValue(this.base64textString);
-    this.registerService.registrate(this.registerForm.value).subscribe((data) => {
-      this.message = data;
-      
-    });
-  }else{
-    this.message="Please tell us what you are..";
+        if(this.registerForm.controls['Picture'].value != ""){    
+          this.registerForm.controls['Picture'].setValue(this.base64textString);
+        }else{
+          this.registerForm.controls['Picture'].setValue("nema slike");
+        }
+        this.registerForm.controls['State'].setValue(0);
+        this.registerForm.controls['BirthdayDate'].setValue("08.08.1980 22:22:00");
 
-  }
-  }else{
-    this.message="Passwords does not match.";
-  }
+        this.registerService.registrate(this.registerForm.value).subscribe((data) => {
+          this.message = data;
+          
+        });
+      }else{
+        this.message="Please tell us what you are..";
+
+      }
+    }else{
+      this.message="Passwords does not match.";
+    }
   }
 
   private base64textString:string="";

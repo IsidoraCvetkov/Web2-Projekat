@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient,private route:Router) { }
 
   login(user: User): Observable<any> {
-    return this.http.post<any>(this.loginUrl, `username=`+ user.username +`&password=`+ user.password + `&grant_type=password`, { 'headers': { 'Content-type': 'x-www-form-urlencoded' } }).pipe(
+    return this.http.post<any>(this.loginUrl, `username=`+ user.email +`&password=`+ user.password + `&grant_type=password`, { 'headers': { 'Content-type': 'x-www-form-urlencoded' } }).pipe(
       map(res => {
         console.log(res.access_token);
 
@@ -36,7 +36,7 @@ export class AuthService {
 
         localStorage.setItem('jwt', jwt)//u localstorage google chroma
         localStorage.setItem('role', role);//u localstorage google chroma
-        localStorage.setItem('email', user.username)//u localstorage google chroma
+        localStorage.setItem('email', user.email)//u localstorage google chroma
         this.isLoggedIn=  true;
         location.reload();
         

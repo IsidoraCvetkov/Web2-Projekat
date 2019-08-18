@@ -14,7 +14,7 @@ This is a very simple parallax effect achieved by simple CSS 3 multiple backgrou
 			    	<h3 class="panel-title">Please log in</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form [formGroup]="logInForm" (ngSubmit)="logIn()" enctype="multipart/form-data" accept-charset="UTF-8">
+			    	<form [formGroup]="logInForm" (ngSubmit)="logIn()" accept-charset="UTF-8">
                     <fieldset>
 			    	  	<div class="form-group">
 							<div class="label-style">E-mail:</div>
@@ -24,7 +24,7 @@ This is a very simple parallax effect achieved by simple CSS 3 multiple backgrou
 							<div class="label-style">Password:</div>
 			    			<input class="form-control" placeholder="Enter your password" formControlName="Password" type="password" value="" required>
 			    		</div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+			    		<input class="btn btn-lg btn-success btn-block" type="submit" *ngIf="!authService.isLoggedIn"  value="Login">
 			    	</fieldset>
 			      	</form>
 			    </div>

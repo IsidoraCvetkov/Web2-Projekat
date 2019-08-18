@@ -20,7 +20,7 @@ import { AdminScheduleComponent } from './admin-schedule/admin-schedule.componen
 import { AdminPriceListComponent } from './admin-price-list/admin-price-list.component';
 
 const routes : Routes = [
-  {path:"log-in", component: LogInComponent},
+  {path:"login", component: LogInComponent},
   {path:"register", component: RegisterComponent},
   {path:"home", component: HomeComponent},
   {path:"bus-location", component: BusLocationComponent},
