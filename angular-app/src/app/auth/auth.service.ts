@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.isLoggedIn=  false;
+    this.isLoggedIn =  false;
     localStorage.removeItem('jwt');//u localstorage google chroma brisemo
     localStorage.removeItem('role');// -||-
     localStorage.removeItem('email');// -||-

@@ -98,9 +98,9 @@
         </a>
       </li>
     </ul>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="button" routerLink="/login">Log In</button>
+      <button *ngIf="isUnregistrated" class="btn btn-outline-success my-2 my-sm-0" type="button" routerLink="/login">Log In</button>
     &nbsp;
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button" routerLink="/register">Register</button>
+        <button *ngIf="isUnregistrated" class="btn btn-outline-success my-2 my-sm-0" type="button" routerLink="/register">Register</button>
     &nbsp;
         <button *ngIf="!isUnregistrated" class="btn btn-outline-success my-2 my-sm-0" type="button" routerLink="/log-out">Log out</button>
   </div>

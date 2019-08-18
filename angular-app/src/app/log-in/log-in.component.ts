@@ -17,8 +17,8 @@ export class LogInComponent implements OnInit {
   message: string;
 
   logInForm = this.fb.group({
-    Email: ['', Validators.required],
-    Password: ['', Validators.required]
+    email: ['', Validators.required],
+    password: ['', Validators.required]
   });
   constructor(public authService: AuthService, public router: Router, private fb: FormBuilder) {
     this.setMessage();

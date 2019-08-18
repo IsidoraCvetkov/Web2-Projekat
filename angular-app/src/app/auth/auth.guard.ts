@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     // not logged in so redirect to login page
     else {
       console.error("Can't access, not admin");
-      this.router.navigate(['/log-in']);
+      this.router.navigate(['/login']);
       return false;
     }
   }

@@ -21,17 +21,17 @@
 						<div class="form-group">
 							<div class="label-style">Buy a daily ticket: </div>
                         </div>
-                        <button class="btn btn-lg btn-success btn-block">Buy</button>
+                        <button [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
                         <br>
                         <div class="form-group">
 							<div class="label-style">Buy a monthly ticket: </div>
                         </div>
-                        <button class="btn btn-lg btn-success btn-block">Buy</button>
+                        <button [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
                         <br>
                         <div class="form-group">
 							<div class="label-style">Buy an annual ticket: </div>
 						</div>
-                        <button class="btn btn-lg btn-success btn-block">Buy</button>
+                        <button [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
 			    	<!-- </fieldset>
 			      	</form> -->
 			    </div>
