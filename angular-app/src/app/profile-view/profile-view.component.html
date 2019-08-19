@@ -7,14 +7,18 @@
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     &nbsp;
                     <img src="assets/approved-icon.png" width = "150" height="150" title="Verification profile status"/></h3>                 
+                    <!-- <img *ngIf="process" src="assets/status-icon.png" width = "150" height="150" title="Click on this icon go on ticket menu"/> -->
 
+                    <!-- <img *ngIf="rejected" src="assets/reject-icon.png" width = "150" height="150" title="Click on this icon go on ticket menu"/>
+
+                    <img *ngIf="approved" src="assets/approved-icon.png" width = "150" height="150" title="Click on this icon go on ticket menu"/> -->
 			 	</div>
 			  	<div class="panel-body">
 			    	<form [formGroup]="updateUserForm" (ngSubmit)="update()" enctype="multipart/form-data" accept-charset="UTF-8">
                     <fieldset>
                             <div class="form-group">
                                     <div class="label-style">Verification status:</div>
-                                    {{regUser.VerificationStatus}}
+                                    {{regUser.State}}
                                 </div>
                         <div class="form-group">
                             <div class="label-style">Name:</div>
@@ -22,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <div class="label-style">Surname:</div>
-                            <input class="form-control" placeholder="Enter your surname" formControlName="Surname" type="text">
+                            <input class="form-control" placeholder="Enter your surname" formControlName="LastName" type="text">
                         </div>
                         <div class="form-group">
                                 <div class="label-style">Address:</div>
@@ -30,12 +34,13 @@
                         </div>
                         <div class="form-group">
                                 <div class="label-style">Date of birth:</div>
-                                <input class="form-control" placeholder="Enter your date of birth" formControlName="Birthday" type="datetime">
+                                <!-- <input class="form-control" placeholder="Enter your date of birth" formControlName="BirthdayDate" type="datetime"> -->
+                                <label class = "label-style">{{regUser.BirthdayDate}}</label>
                             </div>
 			    	  	<div class="form-group">
                             <div class="label-style">E-mail:</div>
 			    		    <!-- <input class="form-control" placeholder="Enter your E-mail" formControlName="Email" type="email"> -->
-                            {{regUser.Email}}
+                            <label class="label-style">{{regUser.Email}}</label>
                         </div>
 
                         <div *ngIf="isRegular">

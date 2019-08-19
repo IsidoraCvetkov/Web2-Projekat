@@ -19,6 +19,10 @@ export class ProfileViewComponent implements OnInit {
 
   message:string;
 
+  public approved:boolean;
+  public rejected:boolean;
+  public process:boolean;
+
   updateUserForm = this.fb.group({
     Email: ['', Validators.email],
     LastName: ['', Validators.required],
@@ -31,13 +35,23 @@ export class ProfileViewComponent implements OnInit {
    }
 
   ngOnInit() {
+
+
+    if(this.regUser.State == 0 || this.regUser.State == 3){
+     this.process = true;
+    } else if(this.regUser.State == 1){
+      this.approved = true;
+    } else if(this.regUser.State == 2){
+      this.rejected = true;
+    }
   }
 
   showProfile():void{
+
     this.profileService.showProfile(localStorage.email).subscribe(regUser=>{
        this.regUser=regUser;
        this.regUser.ConfirmPassword = localStorage.email;
-       this.updateUserForm.controls['FirstName'].setValue(this.regUser.Name);
+       this.updateUserForm.controls['Name'].setValue(this.regUser.Name);
        this.updateUserForm.controls['LastName'].setValue(this.regUser.LastName);
        this.updateUserForm.controls['Address'].setValue(this.regUser.Address);
        this.updateUserForm.controls['Email'].setValue(this.regUser.Email);
@@ -48,11 +62,13 @@ export class ProfileViewComponent implements OnInit {
         } else
        this.isRegular=true;
 
+
+
     });
   }
 
   update(){
-    this.regUser.Name =this.updateUserForm.controls['FirstName'].value;
+    this.regUser.Name =this.updateUserForm.controls['Name'].value;
     this.regUser.LastName =this.updateUserForm.controls['LastName'].value;
     this.regUser.Address =this.updateUserForm.controls['Address'].value;
     this.regUser.Email =this.updateUserForm.controls['Email'].value;

@@ -29,7 +29,7 @@ export class ProfileService {
         map(res => {
         localStorage.email = user.Email;
         alert("Successfully updated!");
-        this.route.navigate(['/start']);
+        this.route.navigate(['/home']);
 
         }),
         catchError(this.handleError<any>('login'))
