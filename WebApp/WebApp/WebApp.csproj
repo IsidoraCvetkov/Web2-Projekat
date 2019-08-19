@@ -253,11 +253,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LineController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
-    <Compile Include="Controllers\PriceListController.cs" />
+    <Compile Include="Controllers\PriceListsController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Dto\PriceListLine.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

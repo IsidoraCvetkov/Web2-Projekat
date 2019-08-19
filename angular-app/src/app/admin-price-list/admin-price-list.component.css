@@ -1,0 +1,32 @@
+body{
+    background: url(http://mymaplist.com/img/parallax/back.png);
+	background-color: #444;
+    background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);    
+}
+
+.left-offset{
+    padding-left:60px;
+}
+
+.h3{
+    color: white;
+}
+
+.panel-heading{
+    color: white;
+}
+
+.label{
+    color: white;
+}
+
+.label-style{
+    font-size: 14;
+    font-style: bold;
+    color: white;
+}
+
+.table {
+    color: white;
+    background-color: #444;
+}
