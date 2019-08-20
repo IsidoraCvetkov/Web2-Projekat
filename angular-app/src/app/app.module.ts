@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +19,7 @@ import { LogOutComponent } from './log-out/log-out.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { Validators, ReactiveFormsModule} from '@angular/forms';
-import { MapComponent } from './map/map.component';
+import { MapComponent } from './admin-station/map/map.component';
 import { UnregistredComponent } from './unregistred/unregistred.component';
 import { ValidateProfileComponent } from './validate-profile/validate-profile.component';
 import { ValidateTicketComponent } from './validate-ticket/validate-ticket.component';
@@ -54,7 +55,9 @@ import { AdminStationComponent } from './admin-station/admin-station.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule, //dodala
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, FormBuilder],
   bootstrap: [AppComponent]

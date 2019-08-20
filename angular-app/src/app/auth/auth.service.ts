@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { User } from './user';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -44,6 +45,7 @@ export class AuthService {
 
       catchError(this.handleError<any>('login'))
     );
+
   }
 
   logout(): void {

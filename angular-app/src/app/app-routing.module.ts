@@ -18,6 +18,7 @@ import { ValidateTicketComponent } from './validate-ticket/validate-ticket.compo
 import { AdminLineMeshComponent } from './admin-line-mesh/admin-line-mesh.component';
 import { AdminScheduleComponent } from './admin-schedule/admin-schedule.component';
 import { AdminPriceListComponent } from './admin-price-list/admin-price-list.component';
+import { AdminStationComponent } from './admin-station/admin-station.component';
 
 const routes : Routes = [
   {path:"login", component: LogInComponent},
@@ -34,10 +35,11 @@ const routes : Routes = [
   {path:"validate-ticket", component : ValidateTicketComponent},
   {path:"admin-line-mesh", component : AdminLineMeshComponent},
   {path:"admin-schedule", component : AdminScheduleComponent},
-  {path:"admin-price-list", component : AdminPriceListComponent}
+  {path:"admin-price-list", component : AdminPriceListComponent},
+  {path:"admin-station", component: AdminStationComponent},
 
-  // {path: "", component: HomeComponent, pathMatch: "full"},
-  // {path: "**", redirectTo: "home"}
+  {path: "", component: HomeComponent, pathMatch: "full"},
+  {path: "**", redirectTo: "home"}
 ];
 
 @NgModule({

@@ -33,6 +33,7 @@ export class LogInComponent implements OnInit {
       console.log(data);
       this.setMessage();
     });
+    this.router.navigate(['/home']);
   }
 
   logout() {

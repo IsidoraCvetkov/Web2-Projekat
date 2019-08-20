@@ -4,7 +4,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/admin-price-list">JGSP</a>
+  <a class="navbar-brand" routerLink="/admin-station">JGSP</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -81,6 +81,13 @@
           <i class="fa fa-calendar">
           </i>
           Update schedule
+        </a>
+      </li>
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/admin-station">
+          <i class="fa fa-map-marker">
+          </i>
+          Update stations
         </a>
       </li>
       <li *ngIf="isAdmin" class="nav-item">

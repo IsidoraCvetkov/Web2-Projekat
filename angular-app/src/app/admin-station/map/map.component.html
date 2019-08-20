@@ -1,0 +1,115 @@
+<div *ngIf="isLoaded">
+  <div class="panel-heading">
+    <h3 class="panel-title">Stations</h3>
+    </div>
+    <br>
+    <table class="table table-striped" >
+        <tr>
+            <th style="padding: 4px;">Name</th>
+            <th style="padding: 4px;">Address</th>
+            <th style="padding: 4px;">Latitude</th>   
+            <th style="padding: 4px;">Longitude</th>      
+            <th style="padding: 4px;"></th> 
+            <th style="padding: 4px;"></th>     
+
+          </tr>
+          <tr *ngFor="let item of stations">
+              <td style="padding: 4px;">{{item.Name}}</td>
+              <td style="padding: 4px;">{{item.Address}}</td>
+              <td style="padding: 4px;">{{item.Latitude}}</td>
+              <td style="padding: 4px;">{{item.Longitude}}</td>
+              <td style="padding: 4px;"><button class="btn btn-lg btn-success btn-block" (click)="Edit(item.Name)">Edit</button></td>
+              <td style="padding: 4px;"><button class="btn btn-lg btn-success btn-block" (click)="Delete(item.Name)">Delete</button></td>
+          </tr>
+    </table>
+</div>
+<div *ngIf="canEdit">
+  <hr>
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit station</h3>
+    </div>
+
+  <form [formGroup]="stationForm" (ngSubmit)="Update()" enctype="multipart/form-data" >
+    <table class="table table-striped" >
+        <tr>
+            <th style="padding: 4px;">Name</th>
+            <th style="padding: 4px;">Address</th>
+            <th style="padding: 4px;">Latitude</th>   
+            <th style="padding: 4px;">Longitude</th>      
+            <th style="padding: 4px;"></th>    
+
+          </tr>
+          <tr>
+              <td>{{statin.Name}}</td>
+              <td style="padding: 4px;"><input type="text" formControlName="Address" required/></td>
+              <td style="padding: 4px;"><input type="number" formControlName="Latitude" required/></td>
+              <td style="padding: 4px;"><input type="number" formControlName="Longitude" required/></td>
+              <td style="padding: 4px;"><button class="btn btn-lg btn-success btn-block">Save</button></td>
+          </tr>
+    </table>
+    </form>
+    <h5 align="center" style=" font: 23px Montserrat, sans-serif;color:#ee2f28;">&nbsp;{{message}}</h5>
+  </div>
+<hr>
+
+<div class="panel-heading">
+  <h3 class="panel-title">Choose location from map</h3>
+  </div>
+
+
+  <p>
+    <!-- Kreiramo mapu -->
+    <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="18" (mapClick)="placeMarker($event)">  
+  
+      <agm-marker [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [title]="markerInfo.title"
+      [label]="markerInfo.label" [iconUrl]="markerInfo.iconUrl">
+  
+        <!-- Svakom markeru dodajemo info-window (Nije obavezno!)-->
+        <agm-info-window [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" >
+  
+          <!-- U info-window stavljamo html -->
+          <span style="font-size: 16px;font-family:'Times New Roman'">Fakultet tehničkih nauka</span>
+          <br/>
+          <span style="font-family:'Times New Roman'; color:gray;"><strong>Jugodrvo</strong></span>
+          <span style="font-family:'Times New Roman'; color:gray;">Bulevar oslobođenja 131</span>
+          <a [href]="markerInfo.link">See the site.</a>
+        </agm-info-window>
+  
+      </agm-marker>
+  
+      <agm-polyline [strokeColor]="polyline.color">
+           <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude">
+           </agm-polyline-point>
+      </agm-polyline>
+  
+      <agm-marker *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude" [iconUrl]="polyline.icon">
+      </agm-marker>
+  
+    </agm-map>
+  </p>
+
+<hr>
+<div class="panel-heading">
+  <h3 class="panel-title">Add station</h3>
+  </div>
+<hr>
+<h5 *ngIf="message1" align="left" style=" font: 23px Montserrat, sans-serif;color:#ee2f28;">&nbsp;{{message1}}</h5>
+
+  <form [formGroup]="station" (ngSubmit)="addStation()" enctype="multipart/form-data"  >
+    <table class="table table-striped">
+        <tr>
+          <th>Name:</th>
+          <td><input type="text" formControlName="Name" required/></td>
+        </tr>
+        <tr>
+          <th>Address:</th>
+          <td><input type="text" formControlName="Address" required/></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button class="btn btn-lg btn-success btn-block">Add</button></td>
+         </tr>
+        </table>
+        </form>
+
+
+        
