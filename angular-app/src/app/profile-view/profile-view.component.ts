@@ -19,10 +19,6 @@ export class ProfileViewComponent implements OnInit {
 
   message:string;
 
-  public approved:boolean;
-  public rejected:boolean;
-  public process:boolean;
-
   updateUserForm = this.fb.group({
     Email: ['', Validators.email],
     LastName: ['', Validators.required],
@@ -35,15 +31,6 @@ export class ProfileViewComponent implements OnInit {
    }
 
   ngOnInit() {
-
-
-    if(this.regUser.State == 0 || this.regUser.State == 3){
-     this.process = true;
-    } else if(this.regUser.State == 1){
-      this.approved = true;
-    } else if(this.regUser.State == 2){
-      this.rejected = true;
-    }
   }
 
   showProfile():void{
@@ -61,9 +48,6 @@ export class ProfileViewComponent implements OnInit {
        this.isRegular=false;
         } else
        this.isRegular=true;
-
-
-
     });
   }
 
