@@ -86,12 +86,8 @@
         <td>{{priceListLine.ValidFrom | date:'yyyy-MM-dd'}}</td>
         <td>{{priceListLine.TypeOfTicket}}</td>
         <td>{{priceListLine.Value}}</td>
-        <td>
-          <button class="btn btn-lg btn-success btn-block" (click)="deleteLine(priceListLine)"> Delete </button>
-        </td>
-        <td>
-          <button class="btn btn-lg btn-success btn-block" (click)="editLine(priceListLine)" style="margin-left: 20px;"> Edit </button>
-        </td>
+        <td style="padding: 4px;"><button class="btn btn-lg btn-success btn-block" (click)="editLine(priceListLine)">Edit</button></td>
+        <td style="padding: 4px;"><button class="btn btn-lg btn-success btn-block" (click)="deleteLine(priceListLine)">Delete</button></td>
         </tr>
       </tbody>
     </table>
