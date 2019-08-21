@@ -536,9 +536,7 @@ namespace WebApp.Controllers
                 SendMail(app.Email, $"Controller has checked your profile! {Environment.NewLine} Your varification status of profile is : " + app.State + ".");
                 return StatusCode(HttpStatusCode.NoContent);
             }
-
         }
-
 
         [Authorize(Roles = "Controller")]
         [Route("GetUsers")]
