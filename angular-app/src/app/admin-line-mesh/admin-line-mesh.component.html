@@ -81,14 +81,14 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th class="hidden">Id Line</th>
+        <!-- <th class="hidden">Id Line</th> -->
         <th>Number</th>
         <th>Type of Line</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let line of lines">
-          <td class="hidden">{{line.IDtypeOfLine}}</td>
+          <!-- <td class="hidden">{{line.IDtypeOfLine}}</td> -->
         <td>{{line.Number}}</td>
         <td>{{line.TypeOfLine}}</td>
         <td style="padding: 4px;"><button class="btn btn-lg btn-success btn-block" (click)="editLine(line)">Edit</button></td>

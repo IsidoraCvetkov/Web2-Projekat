@@ -16,8 +16,8 @@
           <tr *ngFor="let item of stations">
               <td style="padding: 4px;">{{item.Name}}</td>
               <td style="padding: 4px;">{{item.Address}}</td>
-              <td style="padding: 4px;">{{item.Latitude}}</td>
-              <td style="padding: 4px;">{{item.Longitude}}</td>
+              <td style="padding: 4px;">{{item.X}}</td>
+              <td style="padding: 4px;">{{item.Y}}</td>
               <td style="padding: 4px;"><button class="btn btn-lg btn-success btn-block" (click)="Edit(item.Name)">Edit</button></td>
               <td style="padding: 4px;"><button class="btn btn-lg btn-success btn-block" (click)="Delete(item.Name)">Delete</button></td>
           </tr>

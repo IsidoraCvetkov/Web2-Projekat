@@ -23,7 +23,7 @@ export class PriceListAdminService {
    }
 
    public editLine(priceListLine: PriceListLine){
-    return this.client.post<any>(this.baseUrl+"api/PriceList/PostPriceListLine",priceListLine, {'headers': {'Content-type': 'application/json'}});
+    return this.client.post<any>(this.baseUrl+"api/PriceList/EditPriceListLine",priceListLine, {'headers': {'Content-type': 'application/json'}});
    
    // return this.client.post<any>(this.baseUrl+"api/PriceList/EditLine",priceListLine, {'headers': {'Content-type': 'application/json'}});
   }

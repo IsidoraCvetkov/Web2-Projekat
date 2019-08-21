@@ -32,7 +32,6 @@ namespace WebApp.Controllers
         {
             //ne radi dobro izmeniti
 
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -81,8 +80,6 @@ namespace WebApp.Controllers
                     line.Schadules.Add(exist);
                     db.Lines.Update(line);
                 }
-
-
             }
 
             db.Complete();
@@ -111,7 +108,7 @@ namespace WebApp.Controllers
             {
                 dd = Enums.DayType.Workday;
             }
-            else if (sl.Day == "Suburban")
+            else if (sl.Day == "Weekend")
             {
                 dd = Enums.DayType.Weekend;
             }
@@ -128,6 +125,8 @@ namespace WebApp.Controllers
             {
                 s.Lines.Add(line);
                 s.Line = line;
+                s.IdLine = line.IdLine;
+                s.Type = line.RouteType;
             }
 
             List<Schadule> schadules = db.Schadules.GetAll().ToList();
@@ -172,10 +171,10 @@ namespace WebApp.Controllers
                 else
                 {
                     db.Schadules.Remove(schaduleFromBase);
-                    exist.Lines.Add(line);
-                    db.Schadules.Update(exist);
+                    s.Lines.Add(line);
+                    db.Schadules.Update(s);
                     line.Schadules.Remove(schaduleFromBase);
-                    line.Schadules.Add(exist);
+                    line.Schadules.Add(s);
                     db.Lines.Update(line);
 
                 }

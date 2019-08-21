@@ -267,11 +267,23 @@ namespace WebApp.Controllers
                 //line.IdLine = id;
 
                 line.Stations = new List<Station>();
-                foreach (Station s in linePlus.Stations)
+                if (linePlus.Stations != null)
                 {
-                    var station = db.Stations.GetAll().FirstOrDefault(u => u.Name == s.Name);
-                    line.Stations.Add(station);
-                    db.Stations.Update(station);
+                    foreach (Station s in linePlus.Stations)
+                    {
+                        var station = db.Stations.GetAll().FirstOrDefault(u => u.Name == s.Name);
+                        line.Stations.Add(station);
+                        db.Stations.Update(station);
+                    }
+                }
+
+                if (linePlus.TypeOfLine == "Town")
+                {
+                    line.RouteType = Enums.RouteType.Town;
+                }
+                else if(linePlus.TypeOfLine == "Suburban")
+                {
+                    line.RouteType = Enums.RouteType.Suburban;
                 }
 
                 db.Lines.Update(line);

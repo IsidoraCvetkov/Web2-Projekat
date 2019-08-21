@@ -23,7 +23,7 @@ namespace WebApp.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            var t1 = new Ticket { IdTicket = 1, Type = Enums.TicketType.Hourly, From = DateTime.Now, To=DateTime.Now };
+            var t1 = new Ticket { IdTicket = 1, Type = Enums.TicketType.Hourly, From = DateTime.Now, To = DateTime.Now };
             var t2 = new Ticket { IdTicket = 2, Type = Enums.TicketType.Daily, From = DateTime.Now, To = DateTime.Now };
             var t3 = new Ticket { IdTicket = 3, Type = Enums.TicketType.Monthly, From = DateTime.Now, To = DateTime.Now };
             var t4 = new Ticket { IdTicket = 4, Type = Enums.TicketType.Annual, From = DateTime.Now, To = DateTime.Now };
@@ -37,7 +37,7 @@ namespace WebApp.Migrations
 
 
 
-            var s1 = new Station { IdStation = 1, Name = "Grbavica", Address = "Puskinova", X = 0, Y=0 };
+            var s1 = new Station { IdStation = 1, Name = "Grbavica", Address = "Puskinova", X = 0, Y = 0 };
             var s2 = new Station { IdStation = 2, Name = "Liman", Address = "Narodnog fronta", X = 0, Y = 0 };
             var s3 = new Station { IdStation = 3, Name = "Klisa", Address = "Tolstojeva", X = 0, Y = 0 };
             var s4 = new Station { IdStation = 4, Name = "Podbara", Address = "Kosovska", X = 0, Y = 0 };
@@ -126,6 +126,13 @@ namespace WebApp.Migrations
                 var user = new ApplicationUser() { Id = "appu", BirthdayDate = DateTime.Now, UserName = "appu@yahoo.com", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "AppUser");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "kontroler@yahoo.com"))
+            {
+                var user = new ApplicationUser() { Id = "kontroler", BirthdayDate = DateTime.Now, UserName = "kontroler@yahoo.com", Email = "kontroler@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Kontroler123!") };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Controller");
             }
         }
     }

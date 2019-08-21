@@ -152,3 +152,4 @@ C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Mi
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddedLocation.resources
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.NewMigration.resources
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.LineScheduleMigration.resources
+C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.KontrolerMigration.resources

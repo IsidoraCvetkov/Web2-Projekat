@@ -134,14 +134,13 @@ namespace WebApp.Controllers
                 return "null";
             }
 
-            PriceList priceListExist = db.PriceLists.GetAll().FirstOrDefault(u => u.StartDate == priceListLine.ValidFrom);
+            PriceList priceListExist = db.PriceLists.GetAll().FirstOrDefault(u => u.StartDate == priceListLine.ValidFrom );
             TicketType id = (TicketType)priceListLine.TypeOfTicket;//db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
 
             Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.Value == priceListLine.Value && u.Type == id));
             Price newPrice = new Price();
             if (priceExist == null)
             {
-
                 newPrice.Pricelists = new List<PriceList>();
                 newPrice.Value = priceListLine.Value;
                 newPrice.Type = id;//db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
@@ -149,12 +148,7 @@ namespace WebApp.Controllers
 
             if (priceListExist == null)
             {
-
-                /*   int day = priceListLine.ValidFrom.Day;
-                   int m = priceListLine.ValidFrom.Month;
-                   int y = priceListLine.ValidFrom.Year;
-                   DateTime dt = new DateTime(day,m,y);*/
-                PriceList newPriceList = new PriceList() { StartDate = priceListLine.ValidFrom, EndDate = priceListLine.ValidFrom };
+                PriceList newPriceList = new PriceList() { StartDate = priceListLine.ValidFrom, EndDate = priceListLine.ValidFrom, Prices = new List<Price>()  };
                 newPriceList.Prices = new List<Price>();
                 if (priceExist == null)
                 {
@@ -182,16 +176,20 @@ namespace WebApp.Controllers
             else
             {
                 //int idType = db.TypesOfTicket.GetAll().FirstOrDefault(u => u.typeOfTicket == priceListLine.TypeOfTicket).IDtypeOfTicket;
-                foreach (Price p in priceListExist.Prices)
+                if(priceListExist.Prices != null)
                 {
-                    if (p.Type == id)
+                    foreach (Price p in priceListExist.Prices)
                     {
-                        return "type of ticket for this price list exists!";
+                        if (p.Type == id)
+                        {
+                            return "type of ticket for this price list exists!";
+                        }
                     }
                 }
 
                 if (priceExist == null)
                 {
+                    priceListExist.Prices = new List<Price>();
                     priceListExist.Prices.Add(newPrice);
                     db.PriceLists.Update(priceListExist);
                     newPrice.Pricelists.Add(priceListExist);
@@ -217,8 +215,8 @@ namespace WebApp.Controllers
             return "ok";
         }
         [Authorize(Roles = "Admin")]
-        [Route("EditLine")]
-        // POST: api/PriceList/addPriceListLine
+        [Route("EditPriceListLine")]
+        // POST: api/PriceList/EditPriceListLine
         [ResponseType(typeof(PriceList))]
         public string EditPriceListLine(PriceListLine priceListLine)
         {
@@ -235,43 +233,55 @@ namespace WebApp.Controllers
             TicketType id = id = db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
             Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.Value == priceListLine.Value && u.Type == id));
             Price newPrice = new Price();
-            if (priceExist == null)
-            {
+
+            PriceList priceList = new PriceList() { StartDate = priceListLine.ValidFrom, EndDate = priceListLine.ValidFrom, Prices = new List<Price>() };
+
+            //if (priceExist == null)
+            //{
 
                 newPrice.Pricelists = new List<PriceList>();
                 newPrice.Value = priceListLine.Value;
                 newPrice.Type = db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
-            }
+            //}
 
+            priceList.Prices.Add(newPrice);
             Price priceFromBase = db.Prices.GetAll().FirstOrDefault(u => u.IdPrice == priceListLine.IDPrice);
 
-            if (priceFromBase.Pricelists.Count == 1)
-            {
-                PriceList exist = db.PriceLists.GetAll().FirstOrDefault(u => (u.StartDate.Day == priceListLine.ValidFrom.Day && u.StartDate.Month == priceListLine.ValidFrom.Month && u.StartDate.Year == priceListLine.ValidFrom.Year));
-                priceFromBase.Value = priceListLine.Value;
-                db.Prices.Update(priceFromBase);
+            //db.PriceLists.Update(exist);
+            db.Prices.Remove(priceExist);
+            //newPrice.Pricelists.Add(exist);
+            db.Prices.Add(newPrice);
 
-                for (int i = 0; i < exist.Prices.Count; i++)
-                {
-                    if (exist.Prices[i].IdPrice == priceFromBase.IdPrice)
-                    {
-                        exist.Prices[i] = priceFromBase;
-                    }
-                }
+            db.PriceLists.Remove(priceListExist);
+            db.PriceLists.Add(priceList);
 
-                db.PriceLists.Update(exist);
-            }
-            else if (priceFromBase.Pricelists.Count > 1)
-            {
-                PriceList exist = db.PriceLists.GetAll().FirstOrDefault(u => (u.StartDate.Day == priceListLine.ValidFrom.Day && u.StartDate.Month == priceListLine.ValidFrom.Month && u.StartDate.Year == priceListLine.ValidFrom.Year));
+            //if (priceFromBase.Pricelists.Count == 1)
+            //{
+            //    PriceList exist = db.PriceLists.GetAll().FirstOrDefault(u => (u.StartDate.Day == priceListLine.ValidFrom.Day && u.StartDate.Month == priceListLine.ValidFrom.Month && u.StartDate.Year == priceListLine.ValidFrom.Year));
+            //    priceFromBase.Value = priceListLine.Value;
+            //    db.Prices.Update(priceFromBase);
 
-                priceFromBase.Pricelists.Remove(exist);
-                exist.Prices.Remove(priceFromBase);
-                exist.Prices.Add(newPrice);
-                db.PriceLists.Update(exist);
-                newPrice.Pricelists.Add(exist);
-                db.Prices.Add(newPrice);
-            }
+            //    for (int i = 0; i < exist.Prices.Count; i++)
+            //    {
+            //        if (exist.Prices[i].IdPrice == priceFromBase.IdPrice)
+            //        {
+            //            exist.Prices[i] = priceFromBase;
+            //        }
+            //    }
+
+            //    db.PriceLists.Update(exist);
+            //}
+            //else if (priceFromBase.Pricelists.Count > 1)
+            //{
+            //    PriceList exist = db.PriceLists.GetAll().FirstOrDefault(u => (u.StartDate.Day == priceListLine.ValidFrom.Day && u.StartDate.Month == priceListLine.ValidFrom.Month && u.StartDate.Year == priceListLine.ValidFrom.Year));
+
+            //    priceFromBase.Pricelists.Remove(exist);
+            //    exist.Prices.Remove(priceFromBase);
+            //    exist.Prices.Add(newPrice);
+            //    db.PriceLists.Update(exist);
+            //    newPrice.Pricelists.Add(exist);
+            //    db.Prices.Add(newPrice);
+            //}
 
             try
             {
@@ -297,9 +307,9 @@ namespace WebApp.Controllers
             }
 
             Price price = db.Prices.GetAll().FirstOrDefault(u => u.IdPrice == IDPrice);
-            priceList.Prices.Remove(price);
+            //priceList.Prices.Remove(price);
 
-            db.PriceLists.Update(priceList);
+            db.PriceLists.Remove(priceList);
             db.Complete();
 
             return Ok(priceList);

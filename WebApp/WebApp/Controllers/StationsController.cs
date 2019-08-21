@@ -93,7 +93,14 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Stations.Add(station);
+            if (StationExists(station.Name))
+            {
+                return BadRequest("Station with this name alredy exist! Try again.");
+            }
+            else
+            {
+                db.Stations.Add(station);
+            }
 
             try
             {
