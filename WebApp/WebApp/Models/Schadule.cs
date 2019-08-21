@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,6 +16,7 @@ namespace WebApp.Models
         public RouteType Type { get; set; }
         public DayType Day { get; set; }
         public Line Line { get; set; }
+        public List<Line> Lines { get; set; }
         public string DepartureTime { get; set; } //vreme polaska
         [ForeignKey("Line")]
         public int IdLine { get; set; }

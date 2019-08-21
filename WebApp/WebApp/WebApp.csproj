@@ -284,6 +284,10 @@
     <Compile Include="Migrations\201907292011332_NewMigration.Designer.cs">
       <DependentUpon>201907292011332_NewMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908201956450_LineScheduleMigration.cs" />
+    <Compile Include="Migrations\201908201956450_LineScheduleMigration.Designer.cs">
+      <DependentUpon>201908201956450_LineScheduleMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -427,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907292011332_NewMigration.resx">
       <DependentUpon>201907292011332_NewMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908201956450_LineScheduleMigration.resx">
+      <DependentUpon>201908201956450_LineScheduleMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
