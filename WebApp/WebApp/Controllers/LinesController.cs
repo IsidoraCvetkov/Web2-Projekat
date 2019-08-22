@@ -60,13 +60,24 @@ namespace WebApp.Controllers
 
         [AllowAnonymous]
         [Route("GetScheduleLines")]
-        public IEnumerable<Line> GetScheduleLines(string typeOfLine)
+        public IEnumerable<LinePlus> GetScheduleLines(string typeOfLine)
         {
 
             if (typeOfLine == null)
             {
                 var type = db.Lines.GetAll().FirstOrDefault(u => u.RouteType == Enums.RouteType.Town);
-                return db.Lines.GetAll().Where(u => u.RouteType == type.RouteType);
+                //return db.Lines.GetAll().Where(u => u.RouteType == type.RouteType);
+                List<Line> lines = db.Lines.GetAll().ToList();
+                List<LinePlus> ret = new List<LinePlus>();
+
+                foreach (Line l in lines)
+                {
+                    //RouteType type = l.RouteType; //db.TypesOfLine.GetAll().FirstOrDefault(u => u.IDtypeOfLine == l.IDtypeOfLine).typeOfLine;
+                    LinePlus lp = new LinePlus() { Number = l.Number, IDtypeOfLine = 0, TypeOfLine = type.ToString(), Stations = l.Stations };
+                    ret.Add(lp);
+                }
+
+                return ret;
             }
             else
             {
@@ -80,7 +91,21 @@ namespace WebApp.Controllers
                 {
                     type = Enums.RouteType.Suburban;
                 }
-                return db.Lines.GetAll().Where(u => u.RouteType == type);
+                List<Line> lines = db.Lines.GetAll().ToList();
+                List<LinePlus> ret = new List<LinePlus>();
+
+                foreach (Line l in lines)
+                {
+                    if (l.RouteType == type)
+                    {
+                        //RouteType type = l.RouteType; //db.TypesOfLine.GetAll().FirstOrDefault(u => u.IDtypeOfLine == l.IDtypeOfLine).typeOfLine;
+                        LinePlus lp = new LinePlus() { Number = l.Number, IDtypeOfLine = 0, TypeOfLine = type.ToString(), Stations = l.Stations };
+                        ret.Add(lp);
+                    }
+                }
+
+                return ret;
+                //return db.Lines.GetAll().Where(u => u.RouteType == type);
             }
         }
 

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row vertical-offset-100">
-    	<div class="col-md-4 col-md-offset-4">
+			<div class="col-md-6 user-container">
     		<div class="panel panel-default">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Price list</h3>
@@ -10,14 +10,14 @@
                     <fieldset> -->
 			    	  	<div>
                             <div class="label-style">Type of ticket:</div>
-                            <select >
+                            <select class="form-control">
                                 <option *ngFor="let item of dataTicket" >{{item.name}}</option>
                               </select>
 						</div>
 						<br>
 			    		<div>
                             <div class="label-style">Type of passanger:</div>
-                            <select >
+                            <select class="form-control">
                                 <option *ngFor="let item1 of dataUser" >{{item1.name}}</option>
                               </select>
 						</div>

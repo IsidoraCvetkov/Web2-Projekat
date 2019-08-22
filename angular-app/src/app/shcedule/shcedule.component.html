@@ -1,36 +1,56 @@
-<div class="container">
-    <div class="row vertical-offset-100">
-    	<div class="col-md-4 col-md-offset-4">
-    		<div class="panel panel-default">
+<br><br>
+<div class="row left-offset">  
+	<div class="col-md-6 user-container">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Schedule</h3>
 			 	</div>
-			  	<div class="panel-body">
-			    	<form [formGroup]="SheduleForm" (ngSubmit)="schedule()" accept-charset="UTF-8">
+			    	<form [formGroup]="ScheduleForm" (ngSubmit)="ScheduleShow()">
                     <fieldset>
 			    	  	<div class="form-group">
                             <div class="label-style">Type of line:</div>
-                            <select formControlName="line" (change)="typeSelected()" required>
-                                <option *ngFor="let item of TypeLine" [value] = "item.name">{{item.name}}</option>                   
-                            </select>
+                            <select formControlName="line" (change)="typeSelected()" required class="form-control">
+									<option *ngFor="let item1 of TypeLine" [value] = "item1.name">{{item1.name}}</option>
+							</select>
 			    		</div>
 			    		<div class="form-group">
                             <div class="label-style">Type of day:</div>
-                            <select formControlName="day" required>
-                                <option *ngFor="let item of TypeDay" [value] = "item.name">{{item.name}}</option>                
-                            </select>
+                            <select formControlName="day" required class="form-control">
+									<option *ngFor="let item2 of TypeDay" [value] = "item2.name">{{item2.name}}</option>
+							</select>
                         </div>
                         <div class="form-group">
-                            <div class="label-style">Number:</div>
-                            <select formControlName="number" required>
-                                <option *ngFor="let line of lines" [value]="line.Number">{{line.Number}}</option>
-                            </select>
+                            <div class="label-style" for="line">Number:</div>
+                            <select formControlName="number" required class="form-control">
+									<option *ngFor="let line of lines" [value]="line.Number">{{line.Number}}</option>
+							</select>
 			    		</div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Show">
+			    		<button type="submit" [disabled]="!ScheduleForm.valid" class="btn btn-lg btn-success btn-block">Show</button>
 			    	</fieldset>
-			      	</form>
+					  </form>
+					  <br>
+					  <table class="table table-striped" *ngIf="!empty">
+						<thead>
+						<tr>
+						  <!-- <th class="hidden">Id</th> -->
+						  <!-- <th>Number</th> -->
+						  <th>Day</th>
+						  <th>Time</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+						  <!-- <td class="hidden">{{scheduleLine.IDDay}}</td> -->
+						  <!-- <td>{{item1.name}}</td> -->
+						  <td *ngFor="let time of parser"><li>{{time}}</li></td>
+						  <!-- <td>{{item2.name}}</td> -->
+						</tr>
+						</tbody>
+					  </table>
+					  <label class = "label-style-message" *ngIf="empty">{{message}}</label>
+					  <table align="center"> 
+							<ul *ngIf="!empty">
+						<li  *ngFor="let time of parser">{{time}}</li>
+					  </ul>
+					  </table>
 			    </div>
 			</div>
-		</div>
-	</div>
-</div>

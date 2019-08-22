@@ -4,8 +4,8 @@ body{
     background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);    
 }
 
-.vertical-offset-100{
-    padding-top:100px;
+.left-offset{
+    padding-left:80px;
 }
 
 .h3{
@@ -24,4 +24,13 @@ body{
     font-size: 14;
     font-style: bold;
     color: white;
+}
+
+.table {
+    color: white;
+    background-color: #444;
+}
+
+p{
+    color: rgb(255, 0, 0)0;
 }
