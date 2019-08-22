@@ -1,32 +1,75 @@
-<div class="container">
-    <div class="row vertical-offset-100">
-			<div class="col-md-6 user-container">
-    		<div class="panel panel-default">
+<br><br>
+<div class="row left-offset">  
+	<div class="col-md-6 user-container">
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Price list</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<!-- <form [formGroup]="priceListForm" (ngSubmit)="priceList()" enctype="multipart/form-data" accept-charset="UTF-8">
-                    <fieldset> -->
-			    	  	<div>
                             <div class="label-style">Type of ticket:</div>
-                            <select class="form-control">
-                                <option *ngFor="let item of dataTicket" >{{item.name}}</option>
+                            <select  [(ngModel)]="selectedTicket" class="form-control">
+                                <option *ngFor="let item of dataTicket" [ngValue]="item">{{item.name}}</option>
                               </select>
-						</div>
 						<br>
-			    		<div>
+			    		<div *ngIf="!isLogged">
                             <div class="label-style">Type of passanger:</div>
-                            <select class="form-control">
-                                <option *ngFor="let item1 of dataUser" >{{item1.name}}</option>
+                            <select [(ngModel)]="selectedUser" class="form-control">
+                                <option *ngFor="let item1 of dataUser" [ngValue]="item1">{{item1.name}}</option>
                               </select>
 						</div>
 						<br>
-			    		<button class="btn btn-lg btn-success btn-block">Show</button> 
-			    	<!-- </fieldset>
-			      	</form> -->
-			    </div>
-			</div>
-		</div>
-	</div>
-</div>
+						<button class="btn btn-lg btn-success btn-block" (click)="showPrices(isLogged)">Show</button> 
+						<br>
+						<h3 *ngIf="message1" style=" font: 23px Montserrat, sans-serif;color:#ee2f28;">&nbsp;{{message1}}</h3>
+						<br>
+
+					  <table *ngIf="isPriceDataLoaded" class="table table-striped">
+							<tr>
+								<th>Ticket price </th>
+								<td><label>{{prices}}</label></td>
+							  </tr>
+							  <tr>
+								  <td colspan="2"><button class="btn btn-lg btn-success btn-block" (click)="buyTicket()">Buy</button></td>
+								</tr>
+					  </table>
+
+					  <br>
+					  <h3 *ngIf="message" style=" font: 25px Montserrat, sans-serif;color:white;">&nbsp;{{message}}</h3>
+					  <hr>
+					  <form [formGroup]="emailForm" (ngSubmit)="buyOneHour()">
+					  <table *ngIf="isOneHour" class="table table-striped">
+						  <tr>
+							  <td>Email:</td>
+							  <td>
+									<input type="email" formControlName="email" [(ngModel)]="email" required placeholder="Email to get ticket" >
+							  </td>
+								  <td>   
+									  <button class="btn btn-lg btn-success btn-block" type="submit" [disabled]="!emailForm.valid">Buy one-hour ticket here!</button>
+								  </td>
+							</tr>
+					  </table>
+					  </form>
+					  
+					  <div *ngIf="isLogged && tickets.length">
+						<hr>
+						<div class="panel-heading">
+								<h3 class="panel-title">One-hour ticket</h3>
+							 </div>
+						  <table class="table table-striped">
+							  <tr>
+								  <th>ID</th>
+								  <th>Bought time</th>
+								  <th>Check in time</th>   
+								  <th>Check in</th>      
+						 
+								</tr>
+								<tr *ngFor="let item of tickets">
+									<td >{{item.IDticket}}</td>
+									<td>{{item.BoughtTime | date: 'short'}}</td>
+									<td>{{item.CheckIn | date: 'short'}}</td>
+									<td *ngIf= "item.BoughtTime == item.CheckIn"><button class="btn btn-lg btn-success btn-block" (click)="checkIn(item.IDticket)">Check in</button></td>
+									<div *ngIf= "item.BoughtTime != item.CheckIn"><td>Checked in</td></div>
+								</tr>
+						  </table>
+					  
+						</div>
+	</div> 

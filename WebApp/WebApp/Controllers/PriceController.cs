@@ -26,21 +26,47 @@ namespace WebApp.Controllers
             _db = db;
         }
 
-        public Price getLatestPrice(int ticket)
+        public Price getLatestPrice(string ticket)
         {
-            //if (ticket == null)
-            //{
-            //    return null;
-            //}
+            if (ticket == null)
+            {
+                return null;
+            }
+
+            TicketType ticketType = Enums.TicketType.Hourly;
+
+            if (ticket == "One-hour")
+                ticketType = Enums.TicketType.Hourly;
+            else if (ticket == "Day")
+                ticketType = Enums.TicketType.Daily;
+            else if (ticket == "Mounth")
+                ticketType = Enums.TicketType.Monthly;
+            else if (ticket == "Year")
+                ticketType = Enums.TicketType.Annual;
+
             List<PriceList> priceLists = _unitOfWork.PriceLists.GetAll().OrderByDescending(u => u.StartDate).ToList();
-            TicketType idType = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == (TicketType)ticket).Type;
+            TicketType idType = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == ticketType).Type;
+
+            List<Price> prices = _unitOfWork.Prices.GetAll().ToList();
+
+            foreach (var pr in prices)
+            {
+                if (pr.Type == ticketType)
+                {
+                    return pr;
+                }
+            }
+
             foreach (PriceList pl in priceLists)
             {
-                foreach (Price p in pl.Prices)
+                if (pl.Prices != null)
                 {
-                    if (p.Type == idType)
+                    foreach (Price p in pl.Prices)
                     {
-                        return p;
+                        if (p.Type == idType)
+                        {
+                            return p;
+                        }
                     }
                 }
             }
@@ -50,56 +76,90 @@ namespace WebApp.Controllers
 
         //Mora se izmeniti
 
-        //[AllowAnonymous]
-        //[Route("GetOnePrice")]
-        //public double GetOnePrice(int ticket, string user)
-        //{
-        //    if (/*ticket == null ||*/ user == null)
-        //    {
-        //        return 0;
-        //    }
+        [AllowAnonymous]
+        [Route("GetOnePrice")]
+        public double GetOnePrice(string ticket, string user)
+        {
+            if (ticket == null || user == null)
+            {
+                return 0;
+            }
 
-        //    var userr = _unitOfWork.TypesOfUser.GetAll().FirstOrDefault(u => u.typeOfUser == user);
-        //    double pretenge = 1; //popust
-        //    double popust = (double)userr.Percentage;
+            TicketType ticketType = Enums.TicketType.Hourly;
+
+            if (ticket == "One-hour")
+                ticketType = Enums.TicketType.Hourly;
+            else if (ticket == "Day")
+                ticketType = Enums.TicketType.Daily;
+            else if (ticket == "Mounth")
+                ticketType = Enums.TicketType.Monthly;
+            else if (ticket == "Year")
+                ticketType = Enums.TicketType.Annual;
+
+            //var userr = _unitOfWork.TypesOfUser.GetAll().FirstOrDefault(u => u.typeOfUser == user);
+            PassengerType userType = Enums.PassengerType.Regular;
+
+            if (user == "Regular")
+                userType = Enums.PassengerType.Regular;
+            else if (user == "Student")
+                userType = Enums.PassengerType.Student;
+            else if (user == "Pensioner")
+                userType = Enums.PassengerType.Pensioner;
+
+            double pretenge = 1; //popust
+
+            double popust = 0; //(double)userr.Percentage;
+
+            if(user == "Student" || user == "Pensioner")
+            {
+                popust = 10;
+                pretenge = popust / 100;
+            }
+
+            var tickett = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == ticketType);
 
 
-        //    var tickett = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == (TicketType)ticket);
+            Price pricee = getLatestPrice(ticket); // _unitOfWork.Prices.GetAll().FirstOrDefault(u => u.IDtypeOfTicket == tickett.IDtypeOfTicket);
 
-        //    Price pricee = getLatestPrice(ticket);// _unitOfWork.Prices.GetAll().FirstOrDefault(u => u.IDtypeOfTicket == tickett.IDtypeOfTicket);
-        //    if (pricee == null)
-        //        return 0;
+            if (pricee == null)
+                return 0;
 
-        //    if (userr.Percentage != 0)
-        //        pretenge = popust / 100;
+            return pricee.Value * pretenge; //popust
+        }
 
+        [Authorize(Roles = "AppUser")]
+        [Route("GetPrice")]
+        public double GetPrice(string ticket, string email)
+        {
+            double pretenge = 1; //popust
 
-        //    return pricee.Value * pretenge; //popust
+            TicketType ticketType = Enums.TicketType.Hourly;
 
+            if (ticket == "One-hour")
+                ticketType = Enums.TicketType.Hourly;
+            else if (ticket == "Day")
+                ticketType = Enums.TicketType.Daily;
+            else if (ticket == "Mounth")
+                ticketType = Enums.TicketType.Monthly;
+            else if (ticket == "Year")
+                ticketType = Enums.TicketType.Annual;
 
-        //}
+            var email1 = Request.GetOwinContext().Authentication.User.Identity.Name;
+            ApplicationUserManager cont = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            List<ApplicationUser> app = cont.Users.ToList();
 
-        //[Authorize(Roles = "AppUser")]
-        //[Route("GetPrice")]
-        //public double GetPrice(int ticket, string email)
-        //{
-        //    double pretenge = 1; //popust
+            ApplicationUser apUs = app.Where(u => u.Email == email).FirstOrDefault();
 
-        //    var email1 = Request.GetOwinContext().Authentication.User.Identity.Name;
-        //    ApplicationUserManager cont = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    List<ApplicationUser> app = cont.Users.ToList();
+            var tickett = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == ticketType); //koja karta
 
-        //    ApplicationUser apUs = app.Where(u => u.Email == email).FirstOrDefault();
+            var pricee = getLatestPrice(ticket);// _unitOfWork.Prices.GetAll().FirstOrDefault(u => u.IDtypeOfTicket == tickett.IDtypeOfTicket);//koliko kosta
+            //var userr = _unitOfWork.TypesOfUser.GetAll().FirstOrDefault(u => u.IDtypeOfUser == apUs.IDtypeOfUser);
+            //double popust = (double)userr.Percentage;
+            double popust = 5;
 
-        //    var tickett = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == (TicketType)ticket); //koja karta
-
-        //    var pricee = getLatestPrice(ticket);// _unitOfWork.Prices.GetAll().FirstOrDefault(u => u.IDtypeOfTicket == tickett.IDtypeOfTicket);//koliko kosta
-        //    var userr = _unitOfWork.TypesOfUser.GetAll().FirstOrDefault(u => u.IDtypeOfUser == apUs.IDtypeOfUser);
-        //    double popust = (double)userr.Percentage;
-
-        //    pretenge = popust / 100;
-        //    return pricee.Value * pretenge;
-        //}
+            pretenge = popust / 100;
+            return pricee.Value * pretenge;
+        }
 
 
     }
