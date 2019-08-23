@@ -26,17 +26,17 @@ namespace WebApp.Controllers
 
         public TicketsController() { }
 
-        //[Authorize(Roles = "AppUser")]
-        //[Route("Tickets")]
-        //public IEnumerable<Ticket> GetTickets()
-        //{
+        [Authorize(Roles = "AppUser")]
+        [Route("Tickets")]
+        public IEnumerable<Ticket> GetTickets()
+        {
 
-        //    var email1 = Request.GetOwinContext().Authentication.User.Identity.Name;
+            var email1 = Request.GetOwinContext().Authentication.User.Identity.Name;
 
 
-        //    return db.Tickets.GetAll().Where(t => t.UserName == email1 && t.IDtypeOfTicket == 1);
+            return db.Tickets.GetAll().Where(t => /*t.UserName == email1 &&*/ t.Type == Enums.TicketType.Hourly);
 
-        //}
+        }
 
         [Authorize(Roles = "Controller")]
         [Route("CheckValidation")]
@@ -131,77 +131,85 @@ namespace WebApp.Controllers
             return result;
         }
 
-        //[AllowAnonymous]
-        //[Route("Buy")]
-        //[ResponseType(typeof(Ticket))]
-        //public IHttpActionResult PostTicket(string TypeOfTicket, string UserName)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [AllowAnonymous]
+        [Route("Buy")]
+        [ResponseType(typeof(Ticket))]
+        public IHttpActionResult PostTicket(string TypeOfTicket, string UserName)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var ticketId = db.TypesOfTicket.GetAll().Where(t => t.typeOfTicket == TypeOfTicket).FirstOrDefault();
+            //var ticketId = db.TypesOfTicket.GetAll().Where(t => t.typeOfTicket == TypeOfTicket).FirstOrDefault();
 
+            TicketType type = Enums.TicketType.Hourly;
+            if (TypeOfTicket == "One-hour")
+                type = Enums.TicketType.Hourly;
+            else if (TypeOfTicket == "Day")
+                type = Enums.TicketType.Daily;
+            else if (TypeOfTicket == "Mounth")
+                type = Enums.TicketType.Monthly;
+            else if (TypeOfTicket == "Year")
+                type = Enums.TicketType.Annual;
 
-        //    Ticket ticket = new Ticket();
-        //    ticket.BoughtTime = DateTime.Now;
-        //    ticket.UserName = UserName;
-        //    ticket.IDtypeOfTicket = ticketId.IDtypeOfTicket;
-        //    ticket.CheckIn = ticket.BoughtTime;
+            Ticket ticket = new Ticket();
+            ticket.From = DateTime.Now;
+            //ticket.UserName = UserName;
+            ticket.Type = type;
+            ticket.To = ticket.From;
 
-        //    db.Tickets.Add(ticket);
-        //    db.Complete();
+            db.Tickets.Add(ticket);
+            db.Complete();
 
-        //    var user = Request.GetOwinContext().Authentication.User.Identity.Name;
+            var user = Request.GetOwinContext().Authentication.User.Identity.Name;
 
-        //    if (user == null)//neregistrovan
-        //    {
-        //        MailMessage mail = new MailMessage("titovrentavehicle@gmail.com", UserName);
-        //        SmtpClient client = new SmtpClient();
-        //        client.Port = 587;
-        //        client.DeliveryMethod = SmtpDeliveryMethod.Network;
-        //        client.UseDefaultCredentials = true;
-        //        client.Credentials = new NetworkCredential("titovrentavehicle@gmail.com", "drugtito");
-        //        client.DeliveryMethod = SmtpDeliveryMethod.Network;
-        //        client.EnableSsl = true;
-        //        client.Host = "smtp.gmail.com";
-        //        mail.Subject = "Public City Transport Serbia";
-        //        mail.Body = $"You successfully bought ticket at {DateTime.Now}. {Environment.NewLine} Your ticket id is: {ticket.IDticket} {Environment.NewLine}Thank you!";
+            if (user == null)//neregistrovan
+            {
+                MailMessage mail = new MailMessage("izvini.moram@gmail.com", UserName);
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = true;
+                client.Credentials = new NetworkCredential("izvini.moram@gmail.com", "izvinimoram33");
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.EnableSsl = true;
+                client.Host = "smtp.gmail.com";
+                mail.Subject = "Public City Transport Serbia";
+                mail.Body = $"You successfully bought ticket at {DateTime.Now}. {Environment.NewLine} Your ticket id is: {ticket.IdTicket} {Environment.NewLine}Thank you!";
 
-        //        try
-        //        {
-        //            client.Send(mail);
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Console.WriteLine(e);
-        //            return InternalServerError(e);
-        //        }
-        //    }
+                try
+                {
+                    client.Send(mail);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return InternalServerError(e);
+                }
+            }
 
+            return Ok();
+        }
 
-        //    return Ok();
-        //}
+        [Authorize(Roles = "AppUser")]
+        [Route("CheckIn")]
+        [HttpPut]
+        public IHttpActionResult CheckInTicket([FromBody]Ticket t)
+        {
+            Ticket ticket = db.Tickets.Get(t.IdTicket);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
 
-        //[Authorize(Roles = "AppUser")]
-        //[Route("CheckIn")]
-        //[HttpPut]
-        //public IHttpActionResult CheckInTicket([FromBody]Ticket t)
-        //{
-        //    Ticket ticket = db.Tickets.Get(t.IDticket);
-        //    if (ticket == null)
-        //    {
-        //        return NotFound();
-        //    }
+            ticket.To = DateTime.Now;
+            db.Tickets.Update(ticket);
 
-        //    ticket.CheckIn = DateTime.Now;
-        //    db.Tickets.Update(ticket);
+            db.Complete();
 
-        //    db.Complete();
-
-        //    return Ok(ticket);
-        //}
+            return Ok(ticket);
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -401,19 +401,19 @@ namespace WebApp.Controllers
             }
 
             UserManager.AddToRole(user.Id, "AppUser");
-            //SendMail(model.Email, $"Your varification status of profile is : " + model.State.ToString() + ".");
+            SendMail(model.Email, $"Your varification status of profile is : " + model.State.ToString() + ".");
 
             return Ok();
         }
 
         protected void SendMail(string toEmail, string content)
         {
-            MailMessage mail = new MailMessage("isidora.cvetkov@gmail.com", toEmail);
+            MailMessage mail = new MailMessage("izvini.moram@gmail.com", toEmail);
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = true;
-            client.Credentials = new NetworkCredential("isidora.cvetkov@gmail.com", "isidoravranjee3");
+            client.Credentials = new NetworkCredential("izvini.moram@gmail.com", "izvinimoram33");
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.EnableSsl = true;
             client.Host = "smtp.gmail.com";
