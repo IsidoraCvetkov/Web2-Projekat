@@ -28,24 +28,35 @@
 			    	</fieldset>
 					  </form>
 					  <br>
-					  <table class="table table-striped" *ngIf="!empty">
+					  <!-- <table class="table table-striped" *ngIf="!empty">
 						<thead>
 						<tr>
-						  <!-- <th class="hidden">Id</th> -->
-						  <!-- <th>Number</th> -->
 						  <th>Day</th>
 						  <th>Time</th>
 						</tr>
 						</thead>
 						<tbody>
 						<tr>
-						  <!-- <td class="hidden">{{scheduleLine.IDDay}}</td> -->
-						  <!-- <td>{{item1.name}}</td> -->
-						  <td *ngFor="let time of parser"><li>{{time}}</li></td>
-						  <!-- <td>{{item2.name}}</td> -->
+						  <td *ngFor="let time of parser"><li>{{time}}</li></td>	
+						</tr>
+						</tbody>
+					  </table> -->
+					  <table class="table table-striped" *ngIf="!empty">
+						<thead>
+						<tr>
+						  <th>Number</th>
+						  <th>Time</th>
+						  <th>Day</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor="let scheduleLine of schedule">
+						  <td>{{scheduleLine.Number}}</td>
+						  <td>{{scheduleLine.Time | date:'mediumTime'}}</td>
+						  <td>{{scheduleLine.Day}}</td>
 						</tr>
 						</tbody>
 					  </table>
-					  <label class = "label-style-message" *ngIf="empty">{{message}}</label>
+					  <h3 *ngIf="empty" style=" font: 25px Montserrat, sans-serif;color:white;">&nbsp;{{message}}</h3>
 			    </div>
 			</div>

@@ -111,14 +111,74 @@ namespace WebApp.Controllers
 
 
         //testirati
+        //[AllowAnonymous]
+        //[Route("GetSchedule")]
+        //public string GetSchedule(string typeOfLine, string typeOfDay, string Number)
+        //{
+
+        //    if (typeOfLine == null || typeOfDay == null || Number == null)
+        //    {
+        //        return "error";
+        //    }
+
+        //    RouteType type = Enums.RouteType.Town;//db.Lines.GetAll().FirstOrDefault(u => u.RouteType == typeOfLine);
+        //    if (typeOfLine == "Town")
+        //    {
+        //        type = Enums.RouteType.Town;
+        //    }
+        //    else if (typeOfLine == "Suburban")
+        //    {
+        //        type = Enums.RouteType.Suburban;
+        //    }
+
+        //    DayType day = DayType.Workday; //= db.Days.GetAll().FirstOrDefault(u => u.KindOfDay == typeOfDay);
+        //    if (typeOfDay == "Work day")
+        //    {
+        //        day = Enums.DayType.Workday;
+        //    }
+        //    else if (typeOfDay == "Suburban")
+        //    {
+        //        day = Enums.DayType.Weekend;
+        //    }
+
+
+        //    var line = db.Lines.GetAll().FirstOrDefault(u => u.Number == Number);
+
+        //    string dep = "";
+        //    int i = 0;
+        //    foreach (Schadule s in line.Schadules)
+        //    {
+        //        if (s.Day == day)
+        //        {
+        //            i++;
+        //            //dep += s.DepartureTime.Hour.ToString() + ":" + s.DepartureTime.Minute.ToString() + " ";
+        //            dep = s.DepartureTime; 
+        //        }
+        //    }
+        //    if (line.Schadules.Count > 0)
+        //    {
+        //        if (dep.Length != 0)
+        //            dep = dep.Substring(0, dep.Length - 1);
+        //    }
+        //    List<Schadule> sch = new List<Schadule>();
+        //    sch = db.Schadules.GetAll().Where(u => u.Day == day).ToList();
+
+        //    if (dep == "")
+        //    {
+        //        dep = "empty";
+        //    }
+
+        //    return dep;
+        //}
+
         [AllowAnonymous]
         [Route("GetSchedule")]
-        public string GetSchedule(string typeOfLine, string typeOfDay, string Number)
+        public IEnumerable<ScheduleLine> GetSchedule(string typeOfLine, string typeOfDay, string Number)
         {
 
             if (typeOfLine == null || typeOfDay == null || Number == null)
             {
-                return "error";
+                //return BadRequest();
             }
 
             RouteType type = Enums.RouteType.Town;//db.Lines.GetAll().FirstOrDefault(u => u.RouteType == typeOfLine);
@@ -141,36 +201,30 @@ namespace WebApp.Controllers
                 day = Enums.DayType.Weekend;
             }
 
-
-            var line = db.Lines.GetAll().FirstOrDefault(u => u.Number == Number);
-
-            string dep = "";
-            int i = 0;
-            foreach (Schadule s in line.Schadules)
+            List<ScheduleLine> schedule = new List<ScheduleLine>();
+            var lines = db.Lines.GetAll();
+            foreach (var line in lines)
             {
-                if (s.Day == day)
+                if(line.Number == Number)
                 {
-                    i++;
-                    //dep += s.Time.Hour.ToString() + ":" + s.Time.Minute.ToString() + " ";
-                    dep = s.DepartureTime;
+                    foreach (var dep in line.Schadules)
+                    {
+                        //  Day day = db.Days.GetAll().FirstOrDefault(u => u.IDDay == dep.IDDay);
+
+                        ScheduleLine sl = new ScheduleLine();
+                        sl.Number = line.Number;
+                        sl.Time = DateTime.Parse(dep.DepartureTime);
+                        if (dep.Day == DayType.Weekend)
+                            sl.Day = "Weekend";
+                        else if (true)
+                            sl.Day = "Work day";
+                        schedule.Add(sl);
+                    }
                 }
             }
-            if (line.Schadules.Count > 0)
-            {
-                if (dep.Length != 0)
-                    dep = dep.Substring(0, dep.Length - 1);
-            }
-            List<Schadule> sch = new List<Schadule>();
-            sch = db.Schadules.GetAll().Where(u => u.Day == day).ToList();
 
-            if (dep == "")
-            {
-                dep = "empty";
-            }
-
-            return dep;
+            return schedule;
         }
-
 
         [Authorize(Roles = "Admin")]
         [Route("GetScheduleAdmin")]

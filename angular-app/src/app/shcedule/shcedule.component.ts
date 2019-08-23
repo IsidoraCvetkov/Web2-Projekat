@@ -76,14 +76,16 @@ export class ShceduleComponent implements OnInit {
     let typeOfLine = this.ScheduleForm.controls['line'].value;
     let typeOfDay = this.ScheduleForm.controls['day'].value;
     let Number = this.ScheduleForm.controls['number'].value;
-    this.times = await this.scheduleService.getSchedule(typeOfLine,typeOfDay,Number);
-    if(this.times == "empty"){
+    //this.times = await this.scheduleService.getSchedule(typeOfLine,typeOfDay,Number);
+    this.schedule = await this.scheduleService.getSchedule(typeOfLine,typeOfDay,Number);
+    if(this.schedule.length == 0){
       this.empty = true;
       this.message = "There is no departures for this line and type of day.";
-    }else if(this.times == "error"){
-      this.empty = true;
-      this.message = "Something went wrong, please try again."
     }
+    // }else if(this.times == null){
+    //   this.empty = true;
+    //   this.message = "Something went wrong, please try again."
+    // }
     else{
       this.empty = false;
       this.parser = this.times.split(" ");

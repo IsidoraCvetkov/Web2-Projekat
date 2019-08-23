@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Line } from '../models/Line';
+import { ScheduleLine } from '../models/ScheduleLine';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class ScheduleService {
   }
 
   public getSchedule(typeOfLine :string, typeOfDay: string, Number: string) {
-    return this.client.get<string>(this.baseUrl+"api/Line/GetSchedule?typeOfLine="+typeOfLine+"&typeOfDay="+typeOfDay+"&Number="+Number).toPromise<string>();
+    //return this.client.get<string>(this.baseUrl+"api/Line/GetSchedule?typeOfLine="+typeOfLine+"&typeOfDay="+typeOfDay+"&Number="+Number).toPromise<string>();
+    return this.client.get<ScheduleLine[]>(this.baseUrl+"api/Line/GetSchedule?typeOfLine="+typeOfLine+"&typeOfDay="+typeOfDay+"&Number="+Number).toPromise<ScheduleLine[]>();
   }
   public getLines() : Promise<Line[]> {
     return this.client.get<Line[]>(this.baseUrl+"api/Line/GetLines").toPromise<Line[]>();

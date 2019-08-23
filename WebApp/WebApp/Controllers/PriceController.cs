@@ -110,21 +110,26 @@ namespace WebApp.Controllers
 
             double popust = 0; //(double)userr.Percentage;
 
-            if(user == "Student" || user == "Pensioner")
-            {
-                popust = 10;
-                pretenge = popust / 100;
-            }
-
             var tickett = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == ticketType);
 
 
             Price pricee = getLatestPrice(ticket); // _unitOfWork.Prices.GetAll().FirstOrDefault(u => u.IDtypeOfTicket == tickett.IDtypeOfTicket);
 
+
+            double priceRet = pricee.Value;
+
+            if(user == "Student" || user == "Pensioner")
+            {
+                popust = 10;
+                pretenge = popust / 100;
+                priceRet = pricee.Value - pricee.Value * pretenge;
+            }
+
+
             if (pricee == null)
                 return 0;
 
-            return pricee.Value * pretenge; //popust
+            return priceRet; //cena sa popustom
         }
 
         [Authorize(Roles = "AppUser")]
@@ -157,8 +162,17 @@ namespace WebApp.Controllers
             //double popust = (double)userr.Percentage;
             double popust = 5;
 
-            pretenge = popust / 100;
-            return pricee.Value * pretenge;
+            double priceRet = pricee.Value;
+
+            if (apUs.PassengerType == Enums.PassengerType.Student || apUs.PassengerType == Enums.PassengerType.Pensioner)
+            {
+                popust = 10;
+                pretenge = popust / 100;
+                priceRet = pricee.Value - pricee.Value * pretenge;
+            }
+
+            
+            return priceRet;
         }
 
 
