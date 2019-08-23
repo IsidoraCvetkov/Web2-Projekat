@@ -7,8 +7,14 @@
 <!-- <img src="assets/busstationa.png" width = "50" height="50" />
 <img src="assets/busstationb.png" width = "50" height="50" /> -->
 <div class="row left-offset-250">  
-  <a href="/schedule" >
+  <a *ngIf="isRegistrated || isUnregistrated" href="/schedule" >
     <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on schedule menu"/>
+  </a>
+  <a *ngIf="isAdmin" href="/admin-schedule" >
+    <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on update schedule menu"/>
+  </a>
+  <a *ngIf="isController" href="/validate-profile" >
+    <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on validate profile menu"/>
   </a>
   &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
   &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
@@ -21,8 +27,14 @@
   &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
   &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
   &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
-  <a href="/line-mesh" >
+  <a *ngIf="isRegistrated || isUnregistrated" href="/line-mesh" >
     <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on line mesh menu"/>
+  </a>
+  <a *ngIf="isAdmin" href="/admin-line-mesh" >
+    <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on update line mesh menu"/>
+  </a>
+  <a *ngIf="isController" href="/validate-ticket" >
+    <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on validate ticket menu"/>
   </a>
 </div>
 <br>
@@ -33,27 +45,45 @@
     &nbsp;  &nbsp; &nbsp; &nbsp;
     &nbsp;  &nbsp; &nbsp; &nbsp;
     &nbsp;  &nbsp; &nbsp; &nbsp;
-  <a href="/price-list" >
+  <a *ngIf="isRegistrated || isUnregistrated" href="/price-list" >
     <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on price list menu"/>
   </a>
+  <a *ngIf="isAdmin" href="/admin-price-list" >
+    <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on update price list menu"/>
+  </a>
+  <img *ngIf="isController" src="assets/busicon.png" width = "80" height="80"/>
+
     &nbsp;  &nbsp; &nbsp; &nbsp;
     &nbsp;  &nbsp; &nbsp; &nbsp;
     &nbsp;  &nbsp; &nbsp; &nbsp;
-    <a href="/bus-location" >
+    <a *ngIf="isRegistrated || isUnregistrated" href="/bus-location" >
       <img src="assets/bus-icon.png" width = "250" height="250" title="Click on this icon go on bus location menu"/>
     </a>
+    
+    <img *ngIf="isAdmin || isController" src="assets/bus-icon.png" width = "250" height="250"/>
+    
     &nbsp;  &nbsp; &nbsp; &nbsp;
     &nbsp;  &nbsp; &nbsp; &nbsp;
     &nbsp;  &nbsp; &nbsp; &nbsp;
-    <a href="/ticket" >
+    <a *ngIf="isRegistrated || isUnregistrated" href="/ticket" >
       <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on ticket menu"/>
     </a>
+    <a *ngIf="isAdmin" href="/admin-station" >
+      <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on update station menu"/>
+    </a>
+    <img *ngIf="isController" src="assets/busicon.png" width = "80" height="80"/>
+
 </div>
 &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
 &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
-<a href="/login" >
+<a *ngIf="isUnregistrated" href="/login" >
   <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on login"/>
 </a>
+<a *ngIf="isRegistrated" href="/profile" >
+  <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on your profile"/>
+</a>
+<img *ngIf="isAdmin || isController" src="assets/busicon.png" width = "80" height="80"/>
+
 &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
 &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
 &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
@@ -65,7 +95,12 @@
 &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
 &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
 &nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;
-<a href="/register" >
+<a *ngIf="isUnregistrated"href="/register" >
   <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on register"/>
 </a>
+<a *ngIf="isRegistrated" href="/profile" >
+  <img src="assets/busicon.png" width = "80" height="80" title="Click on this icon go on your profile"/>
+</a>
+<img *ngIf="isAdmin || isController" src="assets/busicon.png" width = "80" height="80"/>
+
 <br>
