@@ -17,8 +17,7 @@
 			    	<form [formGroup]="updateUserForm" (ngSubmit)="update()" enctype="multipart/form-data" accept-charset="UTF-8">
                     <fieldset>
                             <div class="form-group">
-                                    <div class="label-style">Verification status:</div>
-                                    {{regUser.State}}
+                                    <div class="label-style">Verification profile status: {{status}}</div>
                                 </div>
                         <div class="form-group">
                             <div class="label-style">Name:</div>
@@ -35,7 +34,7 @@
                         <div class="form-group">
                                 <div class="label-style">Date of birth:</div>
                                 <!-- <input class="form-control" placeholder="Enter your date of birth" formControlName="BirthdayDate" type="datetime"> -->
-                                <label class = "label-style">{{regUser.BirthdayDate}}</label>
+                                <label class = "label-style">{{regUser.BirthdayDate | date}}</label>
                             </div>
 			    	  	<div class="form-group">
                             <div class="label-style">E-mail:</div>
@@ -50,8 +49,12 @@
                                 <img [src]="mySrc" />
                             </div> 
 
-                        <button class="btn btn-lg btn-success btn-block" type="submit">Update</button>
-
+                            <div class="label-style">Update/Add dockumetn image: <input type="file" id="filePicker" (change)="handleFileSelect($event)"></div>
+                            <br>    
+                                <img [src]="mySrc" height="350" width="350"/>
+                            <br>
+                            <br>
+                        <button class="btn btn-lg btn-success btn-block" [disabled]="!updateUserForm.valid" type="submit">Update</button>
                            
                         <br>
                         <!-- <img src="assets/status-icon.png" width = "150" height="150" title="Click on this icon go on ticket menu"/>

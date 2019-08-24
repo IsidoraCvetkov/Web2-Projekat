@@ -45,19 +45,19 @@ namespace WebApp.Controllers
                         p.ValidFrom = v.StartDate;
                         if (price.Type == Enums.TicketType.Hourly)
                         {
-                            p.TypeOfTicket = 0;
+                            p.TypeOfTicket = "One-hour";
                         }
                         else if (price.Type == Enums.TicketType.Daily)
                         {
-                            p.TypeOfTicket = 1;
+                            p.TypeOfTicket = "Day";
                         }
                         else if (price.Type == Enums.TicketType.Monthly)
                         {
-                            p.TypeOfTicket = 2;
+                            p.TypeOfTicket = "Mounth";
                         }
                         else if (price.Type == Enums.TicketType.Annual)
                         {
-                            p.TypeOfTicket = 3;
+                            p.TypeOfTicket = "Year";
                         }
                         //p.TypeOfTicket = Int32.Parse();//Int32.Parse(db.Prices.GetAll().FirstOrDefault(u => u.Type == price.Type).Type.ToString());
                         p.Value = price.Value;
@@ -135,7 +135,16 @@ namespace WebApp.Controllers
             }
 
             PriceList priceListExist = db.PriceLists.GetAll().FirstOrDefault(u => u.StartDate == priceListLine.ValidFrom );
-            TicketType id = (TicketType)priceListLine.TypeOfTicket;//db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
+            TicketType id = Enums.TicketType.Hourly;//(TicketType)priceListLine.TypeOfTicket;//db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
+
+            if (priceListLine.TypeOfTicket == "One-hour")
+                id = Enums.TicketType.Hourly;
+            else if (priceListLine.TypeOfTicket == "Day")
+                id = Enums.TicketType.Daily;
+            else if (priceListLine.TypeOfTicket == "Mounth")
+                id = Enums.TicketType.Monthly;
+            else if (priceListLine.TypeOfTicket == "Year")
+                id = Enums.TicketType.Annual;
 
             Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.Value == priceListLine.Value && u.Type == id));
             Price newPrice = new Price();
@@ -229,8 +238,19 @@ namespace WebApp.Controllers
                 return "null";
             }
 
+            TicketType type = Enums.TicketType.Hourly;//(TicketType)priceListLine.TypeOfTicket;//db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
+
+            if (priceListLine.TypeOfTicket == "One-hour")
+                type = Enums.TicketType.Hourly;
+            else if (priceListLine.TypeOfTicket == "Day")
+                type = Enums.TicketType.Daily;
+            else if (priceListLine.TypeOfTicket == "Mounth")
+                type = Enums.TicketType.Monthly;
+            else if (priceListLine.TypeOfTicket == "Year")
+                type = Enums.TicketType.Annual;
+
             PriceList priceListExist = db.PriceLists.GetAll().FirstOrDefault(u => u.StartDate == priceListLine.ValidFrom);
-            TicketType id = id = db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
+            TicketType id = db.Prices.GetAll().FirstOrDefault(u => u.Type == type).Type;
             Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.Value == priceListLine.Value && u.Type == id));
             Price newPrice = new Price();
 
@@ -241,7 +261,7 @@ namespace WebApp.Controllers
 
                 newPrice.Pricelists = new List<PriceList>();
                 newPrice.Value = priceListLine.Value;
-                newPrice.Type = db.Prices.GetAll().FirstOrDefault(u => u.Type == (TicketType)priceListLine.TypeOfTicket).Type;
+                newPrice.Type = db.Prices.GetAll().FirstOrDefault(u => u.Type == type).Type;
             //}
 
             priceList.Prices.Add(newPrice);

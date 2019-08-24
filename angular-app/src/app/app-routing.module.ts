@@ -29,7 +29,7 @@ const routes : Routes = [
   {path:"schedule", component: ShceduleComponent},
   {path:"ticket", component: TicketComponent},
   {path:"line-mesh", component : LineMeshComponent},
-  {path:"log-out", component : LogOutComponent},
+  {path:"logout", component : LogOutComponent},
   {path:"profile", component : ProfileViewComponent},
   {path:"validate-profile", component : ValidateProfileComponent},
   {path:"validate-ticket", component : ValidateTicketComponent},

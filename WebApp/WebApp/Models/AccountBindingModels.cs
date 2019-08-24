@@ -44,8 +44,8 @@ namespace WebApp.Models
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Lastname")]
-        public string Lastname { get; set; }
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
 
 
         [Required]

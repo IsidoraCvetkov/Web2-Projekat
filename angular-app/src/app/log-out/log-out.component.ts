@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 })
 export class LogOutComponent implements OnInit {
 
-  constructor(private route:Router) { 
-
+  constructor(public route:Router) { 
     localStorage.removeItem('jwt');
     localStorage.removeItem('role');
     localStorage.removeItem('email');
@@ -17,6 +16,8 @@ export class LogOutComponent implements OnInit {
 
     location.reload();
     this.route.navigate(['/home']);
+
+    location.reload();
   }
 
   ngOnInit() {

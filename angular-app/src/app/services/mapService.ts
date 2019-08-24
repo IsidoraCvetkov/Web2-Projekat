@@ -4,6 +4,7 @@ import { map, catchError } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Station } from "../admin-station/map/model/station";
+import { Line } from '../models/Line';
 
 
 @Injectable({
@@ -15,6 +16,9 @@ export class MapService {
 
     constructor(private http: HttpClient,private route:Router) { }
   
+    public getLines() : Promise<Line[]>{
+      return this.http.get<Line[]>(this.registerUrl+"api/Line/GetLines").toPromise<Line[]>();
+    }  
 
     update(station:Station): Observable<string> {
 

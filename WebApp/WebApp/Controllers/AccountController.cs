@@ -375,7 +375,7 @@ namespace WebApp.Controllers
                 UserName = model.Email,
                 Email = model.Email,
                 Name = model.Name,
-                LastName = model.Lastname,
+                LastName = model.LastName,
                 BirthdayDate = model.BirthdayDate,
                 Address = model.Address,
                 Picture = imgUrl,
@@ -459,7 +459,7 @@ namespace WebApp.Controllers
             if (app != null)
             {
                 app.Name = user.Name;
-                app.LastName = user.Lastname;
+                app.LastName = user.LastName;
                 app.Email = user.Email;
                 app.Address = user.Address;
                 app.UserName = user.Email;
@@ -544,7 +544,7 @@ namespace WebApp.Controllers
         {
             List<RegisterBindingModel> users = new List<RegisterBindingModel>();
 
-            users = UserManager.Users.Where(v => v.Picture != "" && (v.State == Enums.VerificationType.Invalid || v.State == Enums.VerificationType.Process)).Select(u => new RegisterBindingModel() { Name = u.Name, Lastname = u.LastName, Picture = u.Picture, Email = u.Email, State = u.State }).ToList();
+            users = UserManager.Users.Where(v => v.Picture != "" && (v.State == Enums.VerificationType.Invalid || v.State == Enums.VerificationType.Process)).Select(u => new RegisterBindingModel() { Name = u.Name, LastName = u.LastName, Picture = u.Picture, Email = u.Email, State = u.State }).ToList();
 
             foreach (var u in users)
             {
@@ -583,7 +583,7 @@ namespace WebApp.Controllers
             if (app != null)
             {
                 rbm.Name = app.Name;
-                rbm.Lastname = app.LastName;
+                rbm.LastName = app.LastName;
                 rbm.Address = app.Address;
                 rbm.BirthdayDate = app.BirthdayDate;
                 rbm.Email = app.Email;

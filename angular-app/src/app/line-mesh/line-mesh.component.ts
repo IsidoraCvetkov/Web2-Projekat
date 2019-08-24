@@ -30,6 +30,30 @@ export class LineMeshComponent implements OnInit {
 
   public lines = [];
 
+  constructor(private ngZone: NgZone,private scheduleAdminService: ScheduleAdminService,public mapService: MapService){
+    this.stations = new Array<Station>();
+  }
+
+  async ngOnInit() {
+    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954),"","Jugodrvo" , "" , "");
+
+      this.polyline = new Polyline([], 'blue', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
+      this.linesAll = await this.scheduleAdminService.getLines();
+      this.linijeBul = new Map<string,boolean>();
+      this.polylines1 = new Array<Polyline>();
+
+      this.linesAll.forEach(e => {
+        this.linijeBul.set(e.Number,false);
+      });
+
+      this.polylines = new Map<string,Polyline>();
+      this.linesAll.forEach(v=>this.lines.push(v.Number));
+
+      this.markersInfo = new Array<MarkerInfo>();
+      this.markersInfos = new Map<string,Array<MarkerInfo>>();
+
+    }
+
   getRandomColor() {
     var color = Math.floor(0x1000000 * Math.random()).toString(16);
     return '#' + ('000000' + color).slice(-6);
@@ -50,7 +74,9 @@ lala(a){
     this.linijeBul[a]=true;
     this.polylines[a] = new Polyline([], this.getRandomColor(), { url:"", scaledSize: {width: 30, height: 30}});
     this.mapService.getStation(a).subscribe(data=>{
-      this.stations=data;
+      
+      //this.stations=this.linesAll['7a'].stations;
+
       this.stations.forEach(s=>{
         this.polylines[a].addLocation(new GeoLocation(s.X,s.Y))
         this.markersInfos[a].push(new MarkerInfo(new GeoLocation(s.X,s.Y),"","Address: "+s.Address,s.Name,""));
@@ -80,33 +106,6 @@ for(var l in this.lines){
 }
 
 }
-
-
-
-  async ngOnInit() {
-    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954),"","Jugodrvo" , "" , "");
-
-      this.polyline = new Polyline([], 'blue', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
-      this.linesAll = await this.scheduleAdminService.getLines();
-      this.linijeBul = new Map<string,boolean>();
-      this.polylines1 = new Array<Polyline>();
-
-      this.linesAll.forEach(e => {
-        this.linijeBul.set(e.Number,false);
-      });
-
-      this.polylines = new Map<string,Polyline>();
-      this.linesAll.forEach(v=>this.lines.push(v.Number));
-
-      this.markersInfo = new Array<MarkerInfo>();
-      this.markersInfos = new Map<string,Array<MarkerInfo>>();
-
-    }
-
-  constructor(private ngZone: NgZone,private scheduleAdminService: ScheduleAdminService,public mapService: MapService){
-
-  }
-
   placeMarker($event){
     this.polyline.addLocation(new GeoLocation($event.coords.lat, $event.coords.lng))
     console.log(this.polyline)

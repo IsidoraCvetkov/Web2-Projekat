@@ -19,11 +19,13 @@ export class ProfileViewComponent implements OnInit {
 
   message:string;
 
+  status : string;
+
   updateUserForm = this.fb.group({
     Email: ['', Validators.email],
     LastName: ['', Validators.required],
     Address: ['', Validators.required],
-    Name: ['', Validators.required],
+    Name: ['', Validators.required]
   });
 
   constructor(public profileService: ProfileService,private fb: FormBuilder) {
@@ -43,8 +45,19 @@ export class ProfileViewComponent implements OnInit {
        this.updateUserForm.controls['Address'].setValue(this.regUser.Address);
        this.updateUserForm.controls['Email'].setValue(this.regUser.Email);
        this.mySrc ="data:image/png;base64," + this.regUser.Picture;
+
+       if(this.regUser.State == 0){
+          this.status = "Process";
+       } else if(this.regUser.State == 1){
+        this.status = "Accepted";
+      } else if(this.regUser.State == 2){
+        this.status = "Rejected";
+     } else if(this.regUser.State == 3){
+      this.status = "Invalid";
+   }
+
        console.log(this.regUser.PassengerType);
-       if(this.regUser.PassengerType === 3){
+       if(this.regUser.PassengerType == 3){
        this.isRegular=false;
         } else
        this.isRegular=true;
