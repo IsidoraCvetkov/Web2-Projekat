@@ -18,7 +18,7 @@ namespace WebApp.Models
         public Line Line { get; set; }
         public List<Line> Lines { get; set; }
         public string DepartureTime { get; set; } //vreme polaska
-        [ForeignKey("Line")]
-        public int IdLine { get; set; }
+        //[ForeignKey("Line")]
+        //public int IdLine { get; set; }
     }
 }

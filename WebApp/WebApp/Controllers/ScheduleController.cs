@@ -125,7 +125,7 @@ namespace WebApp.Controllers
             {
                 s.Lines.Add(line);
                 s.Line = line;
-                s.IdLine = line.IdLine;
+                //s.IdLine = line.IdLine;
                 s.Type = line.RouteType;
             }
 

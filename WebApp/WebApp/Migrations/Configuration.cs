@@ -71,11 +71,11 @@ namespace WebApp.Migrations
             context.Lines.AddOrUpdate(r => r.IdLine, r5);
             context.SaveChanges();
 
-            var sc1 = new Schadule { IdSchadule = 1, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Suburban, IdLine = 1, DepartureTime = "07-07:10|07:45-08:00|08:45-09:00" };
-            var sc2 = new Schadule { IdSchadule = 2, Day = Enums.DayType.Workday, Type = Enums.RouteType.Town, IdLine = 2, DepartureTime = "10:15-10:45|10:30-11:00" };
-            var sc3 = new Schadule { IdSchadule = 3, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Suburban, IdLine = 3, DepartureTime = "14-14:10|15:15-16:05" };
-            var sc4 = new Schadule { IdSchadule = 4, Day = Enums.DayType.Workday, Type = Enums.RouteType.Suburban, IdLine = 4, DepartureTime = "17-17:10|17:15-18:05" };
-            var sc5 = new Schadule { IdSchadule = 5, Day = Enums.DayType.Workday, Type = Enums.RouteType.Town, IdLine = 5, DepartureTime = "14-14:10|15:15-16:05" };
+            var sc1 = new Schadule { IdSchadule = 1, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Suburban,  DepartureTime = "07-07:10|07:45-08:00|08:45-09:00" };
+            var sc2 = new Schadule { IdSchadule = 2, Day = Enums.DayType.Workday, Type = Enums.RouteType.Town,  DepartureTime = "10:15-10:45|10:30-11:00" };
+            var sc3 = new Schadule { IdSchadule = 3, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Suburban,  DepartureTime = "14-14:10|15:15-16:05" };
+            var sc4 = new Schadule { IdSchadule = 4, Day = Enums.DayType.Workday, Type = Enums.RouteType.Suburban,  DepartureTime = "17-17:10|17:15-18:05" };
+            var sc5 = new Schadule { IdSchadule = 5, Day = Enums.DayType.Workday, Type = Enums.RouteType.Town,  DepartureTime = "14-14:10|15:15-16:05" };
 
             context.Schadules.AddOrUpdate(sc => sc.IdSchadule, sc1);
             context.Schadules.AddOrUpdate(sc => sc.IdSchadule, sc2);

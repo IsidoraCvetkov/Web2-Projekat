@@ -296,6 +296,10 @@
     <Compile Include="Migrations\201908241611143_UserMigration.Designer.cs">
       <DependentUpon>201908241611143_UserMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908261947283_SchaduleLineMigration.cs" />
+    <Compile Include="Migrations\201908261947283_SchaduleLineMigration.Designer.cs">
+      <DependentUpon>201908261947283_SchaduleLineMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -448,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908241611143_UserMigration.resx">
       <DependentUpon>201908241611143_UserMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908261947283_SchaduleLineMigration.resx">
+      <DependentUpon>201908261947283_SchaduleLineMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
