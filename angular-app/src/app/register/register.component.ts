@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
   register(){
     //this.router.navigate(["/home"]);
 
-    if(this.registerForm.controls['Password'].value==this.registerForm.controls['ConfirmPassword'].value){
+    if(this.registerForm.controls['Password'].value == this.registerForm.controls['ConfirmPassword'].value){
       if(this.registerForm.controls['PassengerType'].value!=null){
         this.message="";
         if(this.registerForm.controls['Picture'].value != ""){    
@@ -77,12 +77,13 @@ export class RegisterComponent implements OnInit {
           this.registerForm.controls['Picture'].setValue("nema slike");
         }
         this.registerForm.controls['State'].setValue(0);
-        this.registerForm.controls['BirthdayDate'].setValue("08.08.1980 22:22:00");
+        //this.registerForm.controls['BirthdayDate'].setValue(this.registerForm.controls['BirthdayDate'].value);
 
         this.registerService.registrate(this.registerForm.value).subscribe((data) => {
           this.message = data;
           
         });
+        //this.router.navigate(["/login"]);
       }else{
         this.message="Please tell us what you are..";
 
@@ -101,7 +102,7 @@ export class RegisterComponent implements OnInit {
     if (files && file) {
         var reader = new FileReader();
 
-        reader.onload =this._handleReaderLoaded.bind(this);
+        reader.onload = this._handleReaderLoaded.bind(this);
 
         reader.readAsBinaryString(file);
     }
@@ -109,7 +110,7 @@ export class RegisterComponent implements OnInit {
   
   _handleReaderLoaded(readerEvt) {
      var binaryString = readerEvt.target.result;
-            this.base64textString= btoa(binaryString);
+            this.base64textString = btoa(binaryString);
             alert(btoa(binaryString));
             this.mySrc="data:image/png;base64," + this.base64textString;
     }

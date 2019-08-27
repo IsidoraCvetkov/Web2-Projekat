@@ -243,7 +243,7 @@ namespace WebApp.Controllers
                     sl.Time = DateTime.Parse(dep.DepartureTime);
                     if (dep.Day == DayType.Weekend)
                         sl.Day = "Weekend";
-                    else if (true)
+                    else if (dep.Day == DayType.Workday)
                         sl.Day = "Work day";
                     schedule.Add(sl);
                 }
