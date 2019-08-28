@@ -94,17 +94,18 @@ export class AdminPriceListComponent implements OnInit {
       this.priceListLine.TypeOfTicket = 3;
     }
     //this.priceListLine.TypeOfTicket = this.editForm.controls['ticket'].value;
-    this.priceListLine.Value= this.editForm.controls['price'].value;
+    this.priceListLine.Value = this.editForm.controls['price'].value;
     this.priceListLine.ValidFrom = this.editForm.controls['pricelist'].value;
-    this.priceListLine.IDPrice = this.editForm.controls['IDPrice'].value;
-    this.priceListLine.IDPriceList = this.editForm.controls['IDPriceList'].value;
+    //this.priceListLine.TypeOfTicket = this.editForm.controls['ticket'].value;
+    // this.priceListLine.IDPrice = this.editForm.controls['IDPrice'].value;
+    // this.priceListLine.IDPriceList = this.editForm.controls['IDPriceList'].value;
 
    let s =  this.PriceListAdminService.editLine(this.priceListLine).subscribe(data=>{
       this.getPriceList();
       this.messageEdit=data;
      
     }, err => console.log(err));
-
+    console.log(this.messageEdit);
     this.isBtnEditClicked = false;
 
   }

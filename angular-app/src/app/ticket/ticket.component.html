@@ -1,41 +1,64 @@
-<div class="container">
-    <div class="row vertical-offset-100">
-    	<div class="col-md-4 col-md-offset-4">
-    		<div class="panel panel-default">
+<br><br>
+<div class="row left-offset">  
+	<div class="col-md-6 user-container">
 			  	<div class="panel-heading">
-			    	<h3 class="panel-title">Buy a ticket</h3>
+			    	<h3 class="panel-title">Buyed user tickets</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<!-- <form [formGroup]="ticketForm" (ngSubmit)="buyTicket()" accept-charset="UTF-8"> -->
-                    <!-- <fieldset> -->
-			    	  	<div class="form-group">
-							<div class="label-style">Buy a time ticket: </div>
-			    		    <!-- <input class="form-control" placeholder="Enter your E-mail" name="email" type="email"> -->
+			    	  	<!-- <div class="form-group">
+							<div class="label-style">Buy a one-hour ticket: </div>
 			    		</div>
-			    		<!-- <div class="form-group">
-							<div class="label-style">Password:</div>
-			    		    <input class="form-control" placeholder="Enter your password" formControlName="Password" type="password" value="">
-			    		</div> -->
-                        <button class="btn btn-lg btn-success btn-block">Buy</button>
+                        <button class="btn btn-lg btn-success btn-block" (click)="buyTicket()">Buy</button>
 						<br>
 						<div class="form-group">
 							<div class="label-style">Buy a daily ticket: </div>
                         </div>
-                        <button [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
+                        <button (click)="buyTicket()" [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
                         <br>
                         <div class="form-group">
 							<div class="label-style">Buy a monthly ticket: </div>
                         </div>
-                        <button [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
+                        <button (click)="buyTicket()" [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
                         <br>
                         <div class="form-group">
 							<div class="label-style">Buy an annual ticket: </div>
 						</div>
-                        <button [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
-			    	<!-- </fieldset>
-			      	</form> -->
+						<button (click)="buyTicket()" [disabled]="isUnregistrated" class="btn btn-lg btn-success btn-block">Buy</button>
+						<br> -->
+						<!-- <form [formGroup]="emailForm" (ngSubmit)="buyOneHour()">
+							<table *ngIf="isOneHour" class="table table-striped">
+								<tr>
+									<td>Email:</td>
+									<td>
+										  <input type="email" formControlName="email" [(ngModel)]="email" required placeholder="Email to get ticket" >
+									</td>
+										<td>   
+											<button class="btn btn-lg btn-success btn-block" type="submit" [disabled]="!emailForm.valid">Buy one-hour ticket here!</button>
+										</td>
+								  </tr>
+							</table>
+							</form> -->
+							<div *ngIf="isLogged">
+								<hr>
+								<div class="panel-heading">
+										<h3 class="panel-title">All user tickets</h3>
+									 </div>
+								  <table class="table table-striped">
+									  <tr>
+										  <th>Ticket type</th>
+										  <th>Bought ticket time</th>
+										  <!-- <th>Check in time</th>-->
+										</tr>
+										<tr *ngFor="let item of tickets">
+											<td *ngIf = "item.Type == 0">One-hour</td>
+											<td *ngIf = "item.Type == 1">Day</td>
+											<td *ngIf = "item.Type == 2">Mounth</td>
+											<td *ngIf = "item.Type == 3">Year</td>
+											<td>{{item.From | date: 'short'}}</td>
+											<!-- <td>{{item.To | date: 'short'}}</td> -->
+										</tr>
+								  </table>
+							  
+								</div>		
 			    </div>
 			</div>
-		</div>
-	</div>
-</div>

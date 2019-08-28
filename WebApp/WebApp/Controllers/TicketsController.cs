@@ -34,7 +34,19 @@ namespace WebApp.Controllers
             var email1 = Request.GetOwinContext().Authentication.User.Identity.Name;
 
 
-            return db.Tickets.GetAll().Where(t => /*t.UserName == email1 &&*/ t.Type == Enums.TicketType.Hourly);
+            return db.Tickets.GetAll().Where(t => t.UserName == email1 && t.Type == Enums.TicketType.Hourly);
+
+        }
+
+        [Authorize(Roles = "AppUser")]
+        [Route("AllTickets")]
+        public IEnumerable<Ticket> GetAllTickets()
+        {
+
+            var email1 = Request.GetOwinContext().Authentication.User.Identity.Name;
+
+
+            return db.Tickets.GetAll().Where(t => t.UserName == email1);
 
         }
 
@@ -155,7 +167,7 @@ namespace WebApp.Controllers
 
             Ticket ticket = new Ticket();
             ticket.From = DateTime.Now;
-            //ticket.UserName = UserName;
+            ticket.UserName = UserName;
             ticket.Type = type;
             ticket.To = ticket.From;
 

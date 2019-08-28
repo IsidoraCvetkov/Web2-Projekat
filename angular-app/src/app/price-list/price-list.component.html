@@ -48,7 +48,6 @@
 							</tr>
 					  </table>
 					  </form>
-					  <!-- && tickets.length -->
 
 					  <div *ngIf="isLogged && tickets.length">
 						<hr>
@@ -57,16 +56,19 @@
 							 </div>
 						  <table class="table table-striped">
 							  <tr>
-								  <th>ID</th>
+								  <th>Ticket type</th>
 								  <th>Bought time</th>
 								  <th>Check in time</th>   
 								  <th>Check in</th>      
 						 
 								</tr>
 								<tr *ngFor="let item of tickets">
-									<td >{{item.IDticket}}</td>
-									<td>{{item.BoughtTime | date: 'short'}}</td>
-									<td>{{item.CheckIn | date: 'short'}}</td>
+									<td *ngIf = "item.Type == 0">One-hour</td>
+									<td *ngIf = "item.Type == 1">Day</td>
+									<td *ngIf = "item.Type == 2">Mounth</td>
+									<td *ngIf = "item.Type == 3">Year</td>
+									<td>{{item.From | date: 'short'}}</td>
+									<td>{{item.To | date: 'short'}}</td>
 									<td *ngIf= "item.BoughtTime == item.CheckIn"><button class="btn btn-lg btn-success btn-block" (click)="checkIn(item.IDticket)">Check in</button></td>
 									<div *ngIf= "item.BoughtTime != item.CheckIn"><td>Checked in</td></div>
 								</tr>

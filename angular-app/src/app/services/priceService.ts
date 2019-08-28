@@ -62,6 +62,15 @@ export class PriceService {
           //catchError(this.handleError<Hero[]>('getHeroes', []))
         );
       }
+
+      showAllTickets(): Observable<Ticket[]> {
+        //user.IDtypeOfUser = 1;
+        
+        return this.http.get<Ticket[]>(this.registerUrl+"Tickets/AllTickets")
+        .pipe(
+          //catchError(this.handleError<Hero[]>('getHeroes', []))
+        );
+      }
      
   }
   

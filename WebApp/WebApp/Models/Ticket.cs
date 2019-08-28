@@ -15,5 +15,6 @@ namespace WebApp.Models
         public DateTime To { get; set; }
         public PassengerType Passenger { get; set; }
         public TicketType Type { get; set; }
+        public string UserName { get; set; }
     }
 }
