@@ -533,7 +533,7 @@ namespace WebApp.Controllers
                 return BadRequest();
             else
             {
-                SendMail(app.Email, $"Controller has checked your profile! {Environment.NewLine} Your varification status of profile is : " + app.State + ".");
+                //SendMail(app.Email, $"Controller has checked your profile! {Environment.NewLine} Your varification status of profile is : " + app.State + ".");
                 return StatusCode(HttpStatusCode.NoContent);
             }
         }

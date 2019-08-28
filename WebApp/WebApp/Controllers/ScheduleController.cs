@@ -47,7 +47,7 @@ namespace WebApp.Controllers
             {
                 dd = Enums.DayType.Workday;
             }
-            else if (sl.Day == "Suburban")
+            else if (sl.Day == "Weekend")
             {
                 dd = Enums.DayType.Weekend;
             }
@@ -58,10 +58,12 @@ namespace WebApp.Controllers
                 d.Lines = new List<Line>();
             }
             var line = db.Lines.GetAll().FirstOrDefault(u => u.Number == sl.Number);
-            line.Stations = new List<Station>();
+            if (line.Stations == null)
+            {
+                line.Stations = new List<Station>();
+            }
 
-
-            Schadule exist = db.Schadules.GetAll().FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() /*&&  u.IdSchadule == dd.IDDay*/));
+            Schadule exist = db.Schadules.GetAll().FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() && u.Day == dd));
             if (exist == null)
             {
 
@@ -73,7 +75,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                if (line.Schadules.FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() /*&& u.Day == dd.IDDay*/)) == null)
+                if (line.Schadules.FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() && u.Day == dd)) == null)
                 {
                     exist.Lines.Add(line);
                     db.Schadules.Update(exist);

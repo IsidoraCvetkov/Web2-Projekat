@@ -35,7 +35,9 @@ export class LineMeshComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954),"","Jugodrvo" , "" , "");
+    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954), 
+      "assets/ftn.png",
+      "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
 
       this.polyline = new Polyline([], 'blue', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
       this.linesAll = await this.scheduleAdminService.getLines();
@@ -72,14 +74,14 @@ lala(a){
   else{
     this.markersInfos[a] = new Array<MarkerInfo>();
     this.linijeBul[a]=true;
-    this.polylines[a] = new Polyline([], this.getRandomColor(), { url:"", scaledSize: {width: 30, height: 30}});
+    this.polylines[a] = new Polyline([], this.getRandomColor(), { url:"assets/busicon.png", scaledSize: {width: 30, height: 30}});
     this.mapService.getStation(a).subscribe(data=>{
       
       //this.stations=this.linesAll['7a'].stations;
 
       this.stations.forEach(s=>{
         this.polylines[a].addLocation(new GeoLocation(s.X,s.Y))
-        this.markersInfos[a].push(new MarkerInfo(new GeoLocation(s.X,s.Y),"","Address: "+s.Address,s.Name,""));
+        this.markersInfos[a].push(new MarkerInfo(new GeoLocation(s.X,s.Y),"assets/busicon.png","Address: "+s.Address,s.Name,""));
         for(var l in this.lines){
           if(this.markersInfos[this.lines[l]]!=null){
             for(var aa in this.markersInfos[this.lines[l]]){
