@@ -304,6 +304,10 @@
     <Compile Include="Migrations\201908281202262_TicketMigration.Designer.cs">
       <DependentUpon>201908281202262_TicketMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908281717118_LineStationRowVersionMigration.cs" />
+    <Compile Include="Migrations\201908281717118_LineStationRowVersionMigration.Designer.cs">
+      <DependentUpon>201908281717118_LineStationRowVersionMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -462,6 +466,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908281202262_TicketMigration.resx">
       <DependentUpon>201908281202262_TicketMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281717118_LineStationRowVersionMigration.resx">
+      <DependentUpon>201908281717118_LineStationRowVersionMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -16,5 +16,7 @@ namespace WebApp.Models
         public RouteType RouteType { get; set; }
         public List<Station> Stations { get; set; }
         public virtual List<Schadule> Schadules { get; set; }
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

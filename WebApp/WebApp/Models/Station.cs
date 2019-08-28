@@ -15,5 +15,7 @@ namespace WebApp.Models
         public double X { get; set; }
         public double Y { get; set; }
         public List<Line> Lines { get; set; }
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }
