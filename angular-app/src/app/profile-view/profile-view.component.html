@@ -5,7 +5,7 @@
 			  	<div class="panel-heading">
 			    	<h3 class="panel-title">Profile &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;
+                                                    &nbsp; </h3>
                     <!-- <img src="assets/approved-icon.png" width = "150" height="150" title="Verification profile status"/></h3>                  -->
                     <!-- <img *ngIf="process" src="assets/status-icon.png" width = "150" height="150" title="Click on this icon go on ticket menu"/> -->
 
@@ -15,7 +15,6 @@
 			 	</div>
 			  	<div class="panel-body">
 			    	<form [formGroup]="updateUserForm" (ngSubmit)="update()" enctype="multipart/form-data" accept-charset="UTF-8">
-                    <fieldset>
                             <div class="form-group">
                                     <div class="label-style">Verification profile status: {{status}}</div>
                                 </div>
@@ -62,8 +61,6 @@
                         <img src="assets/reject-icon.png" width = "150" height="150" title="Click on this icon go on ticket menu"/>
 
                         <img src="assets/approved-icon.png" width = "150" height="150" title="Click on this icon go on ticket menu"/> -->
-
-			    	    </fieldset>
                     </form>
 			    </div>
 			</div>

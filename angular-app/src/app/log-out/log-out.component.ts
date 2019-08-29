@@ -15,7 +15,8 @@ export class LogOutComponent implements OnInit {
     localStorage.removeItem('pass');
 
     //location.reload();
-    window.location.href = '/home'; 
+    location.href = '/home'; 
+    //window.location.href = '/home'; 
     //this.route.navigate(['/home']);
     //location.href = location.href;
     //location.reload();
