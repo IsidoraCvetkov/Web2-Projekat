@@ -223,6 +223,7 @@ namespace WebApp.Controllers
             }
             return "ok";
         }
+
         [Authorize(Roles = "Admin")]
         [Route("EditPriceListLine")]
         // POST: api/PriceList/EditPriceListLine
@@ -251,7 +252,9 @@ namespace WebApp.Controllers
 
             PriceList priceListExist = db.PriceLists.GetAll().FirstOrDefault(u => u.StartDate == priceListLine.ValidFrom);
             TicketType id = db.Prices.GetAll().FirstOrDefault(u => u.Type == type).Type;
-            Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.Value == priceListLine.Value && u.Type == id));
+            //Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.Value == priceListLine.Value && u.Type == id));
+            Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.IdPrice == priceListExist.IdPriceList));
+
             Price newPrice = new Price();
 
             PriceList priceList = new PriceList() { StartDate = priceListLine.ValidFrom, EndDate = priceListLine.ValidFrom, Prices = new List<Price>() };
@@ -268,11 +271,12 @@ namespace WebApp.Controllers
             Price priceFromBase = db.Prices.GetAll().FirstOrDefault(u => u.IdPrice == priceListLine.IDPrice);
 
             //db.PriceLists.Update(exist);
-            db.Prices.Remove(priceExist);
+            if (priceExist != null)
+                db.Prices.Remove(priceExist);
             //newPrice.Pricelists.Add(exist);
             db.Prices.Add(newPrice);
-
-            db.PriceLists.Remove(priceListExist);
+            if (priceListExist != null)
+                db.PriceLists.Remove(priceListExist);
             db.PriceLists.Add(priceList);
 
             //if (priceFromBase.Pricelists.Count == 1)

@@ -14,10 +14,12 @@ export class LogOutComponent implements OnInit {
     localStorage.removeItem('email');
     localStorage.removeItem('pass');
 
-    location.reload();
-    this.route.navigate(['/home']);
-
-    location.reload();
+    //location.reload();
+    window.location.href = '/home'; 
+    //this.route.navigate(['/home']);
+    //location.href = location.href;
+    //location.reload();
+    
   }
 
   ngOnInit() {
