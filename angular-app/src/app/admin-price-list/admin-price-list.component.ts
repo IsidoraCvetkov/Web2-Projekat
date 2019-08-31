@@ -63,16 +63,16 @@ export class AdminPriceListComponent implements OnInit {
 
   public async onSubmit(){
 
-    if(this.addForm.controls['ticket'].value == "One-hour"){
-      this.priceListLine.TypeOfTicket = 0;
-    } else if(this.addForm.controls['ticket'].value == "Day"){
-      this.priceListLine.TypeOfTicket = 1;
-    } else if(this.addForm.controls['ticket'].value == "Mounth"){
-      this.priceListLine.TypeOfTicket = 2;
-    } else if(this.addForm.controls['ticket'].value == "Year"){
-      this.priceListLine.TypeOfTicket = 3;
-    }
-    //this.priceListLine.TypeOfTicket = this.addForm.controls['ticket'].value;
+    // if(this.addForm.controls['ticket'].value == "One-hour"){
+    //   this.priceListLine.TypeOfTicket = 0;
+    // } else if(this.addForm.controls['ticket'].value == "Day"){
+    //   this.priceListLine.TypeOfTicket = 1;
+    // } else if(this.addForm.controls['ticket'].value == "Mounth"){
+    //   this.priceListLine.TypeOfTicket = 2;
+    // } else if(this.addForm.controls['ticket'].value == "Year"){
+    //   this.priceListLine.TypeOfTicket = 3;
+    // }
+    this.priceListLine.TypeOfTicket = this.addForm.controls['ticket'].value;
     this.priceListLine.Value= this.addForm.controls['price'].value;
     this.priceListLine.ValidFrom = this.addForm.controls['pricelist'].value;
     
@@ -84,22 +84,22 @@ export class AdminPriceListComponent implements OnInit {
 
   public async onSubmitEdit(){
 
-    if(this.addForm.controls['ticket'].value == "One-hour"){
-      this.priceListLine.TypeOfTicket = 0;
-    } else if(this.addForm.controls['ticket'].value == "Day"){
-      this.priceListLine.TypeOfTicket = 1;
-    } else if(this.addForm.controls['ticket'].value == "Mounth"){
-      this.priceListLine.TypeOfTicket = 2;
-    } else if(this.addForm.controls['ticket'].value == "Year"){
-      this.priceListLine.TypeOfTicket = 3;
-    }
+    // if(this.addForm.controls['ticket'].value == "One-hour"){
+    //   this.priceListLine.TypeOfTicket = 0;
+    // } else if(this.addForm.controls['ticket'].value == "Day"){
+    //   this.priceListLine.TypeOfTicket = 1;
+    // } else if(this.addForm.controls['ticket'].value == "Mounth"){
+    //   this.priceListLine.TypeOfTicket = 2;
+    // } else if(this.addForm.controls['ticket'].value == "Year"){
+    //   this.priceListLine.TypeOfTicket = 3;
+    // }
     //this.priceListLine.TypeOfTicket = this.editForm.controls['ticket'].value;
     this.priceListLine.Value = this.editForm.controls['price'].value;
     this.priceListLine.ValidFrom = this.editForm.controls['pricelist'].value;
     this.priceListLine.TypeOfTicket = this.editForm.controls['ticket'].value;
-    //this.priceListLine.TypeOfTicket = this.editForm.controls['ticket'].value;
-    // this.priceListLine.IDPrice = this.editForm.controls['IDPrice'].value;
-    // this.priceListLine.IDPriceList = this.editForm.controls['IDPriceList'].value;
+    this.priceListLine.TypeOfTicket = this.editForm.controls['ticket'].value;
+    this.priceListLine.IDPrice = this.editForm.controls['IDPrice'].value;
+    this.priceListLine.IDPriceList = this.editForm.controls['IDPriceList'].value;
 
    let s =  this.PriceListAdminService.editLine(this.priceListLine).subscribe(data=>{
       this.getPriceList();

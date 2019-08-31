@@ -140,7 +140,6 @@ C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\bin\Microsoft.Owin.
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\bin\System.Web.Http.Owin.xml
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.csprojResolveAssemblyReference.cache
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.InitialMigration.resources
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.csproj.GenerateResource.cache
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.csproj.CoreCompileInputs.cache
@@ -157,3 +156,4 @@ C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Mi
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.SchaduleLineMigration.resources
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.TicketMigration.resources
 C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.Migrations.LineStationRowVersionMigration.resources
+C:\Users\isidora.cvetkov\Desktop\Web2-Projekat\WebApp\WebApp\obj\Debug\WebApp.csprojResolveAssemblyReference.cache

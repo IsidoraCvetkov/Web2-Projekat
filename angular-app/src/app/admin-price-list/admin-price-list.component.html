@@ -72,8 +72,8 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <!-- <th class="hidden">IdPrice</th>
-        <th class="hidden">IdPriceList</th> -->
+        <th class="hidden">IdPrice</th>
+        <th class="hidden">IdPriceList</th>
         <th>Valid from</th>
         <th>Type of ticket</th>
         <th>Price of ticket</th>
@@ -81,8 +81,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let priceListLine of priceList">
-        <!-- <td class="hidden">{{priceListLine.IDPrice}}</td>
-        <td class="hidden">{{priceListLine.IDPriceList}}</td> -->
+        <td class="hidden">{{priceListLine.IDPrice}}</td>
+        <td class="hidden">{{priceListLine.IDPriceList}}</td>
         <td>{{priceListLine.ValidFrom | date:'yyyy-MM-dd'}}</td>
         <td>{{priceListLine.TypeOfTicket}}</td>
         <td>{{priceListLine.Value}}</td>

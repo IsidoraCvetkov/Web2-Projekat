@@ -35,11 +35,15 @@ namespace WebApp.Controllers
             //privremeno resenje citanja iz baze
             List<Price> prices = db.Prices.GetAll().ToList();
 
+
+
             foreach (var v in priceLists)
             {
-                foreach (var price in prices)
-                {
-                    if (price.IdPrice == v.IdPriceList)
+                //if (v.Prices != null)
+                //{
+                    foreach (var price in prices)
+                    {
+                    if (price.IdPrice == v.IdPriceList+1)
                     {
                         PriceListLine p = new PriceListLine();
                         p.ValidFrom = v.StartDate;
@@ -66,6 +70,7 @@ namespace WebApp.Controllers
                         ret.Add(p);
                     }
                 }
+                //}
             }
 
             return ret.OrderBy(o => o.ValidFrom).ToList(); ;
@@ -250,10 +255,10 @@ namespace WebApp.Controllers
             else if (priceListLine.TypeOfTicket == "Year")
                 type = Enums.TicketType.Annual;
 
-            PriceList priceListExist = db.PriceLists.GetAll().FirstOrDefault(u => u.StartDate == priceListLine.ValidFrom);
-            TicketType id = db.Prices.GetAll().FirstOrDefault(u => u.Type == type).Type;
+            PriceList priceListExist = db.PriceLists.GetAll().FirstOrDefault(u => u.IdPriceList == priceListLine.IDPriceList);
+            //TicketType id = db.Prices.GetAll().FirstOrDefault(u => u.Type == type).Type;
             //Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.Value == priceListLine.Value && u.Type == id));
-            Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.IdPrice == priceListExist.IdPriceList));
+            Price priceExist = db.Prices.GetAll().FirstOrDefault(u => (u.IdPrice == priceListLine.IDPrice));
 
             Price newPrice = new Price();
 
@@ -264,15 +269,15 @@ namespace WebApp.Controllers
 
                 newPrice.Pricelists = new List<PriceList>();
                 newPrice.Value = priceListLine.Value;
-                newPrice.Type = db.Prices.GetAll().FirstOrDefault(u => u.Type == type).Type;
+                newPrice.Type = type;//db.Prices.GetAll().FirstOrDefault(u => u.Type == type).Type;
             //}
 
             priceList.Prices.Add(newPrice);
             Price priceFromBase = db.Prices.GetAll().FirstOrDefault(u => u.IdPrice == priceListLine.IDPrice);
 
             //db.PriceLists.Update(exist);
-            if (priceExist != null)
-                db.Prices.Remove(priceExist);
+            //if (priceExist != null)
+            //    db.Prices.Remove(priceExist);
             //newPrice.Pricelists.Add(exist);
             db.Prices.Add(newPrice);
             if (priceListExist != null)
