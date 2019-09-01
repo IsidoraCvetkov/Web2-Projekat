@@ -36,18 +36,23 @@ namespace WebApp.Migrations
             context.SaveChanges();
 
 
-
-            var s1 = new Station { IdStation = 1, Name = "Grbavica", Address = "Puskinova", X = 0, Y = 0 };
-            var s2 = new Station { IdStation = 2, Name = "Liman", Address = "Narodnog fronta", X = 0, Y = 0 };
-            var s3 = new Station { IdStation = 3, Name = "Klisa", Address = "Tolstojeva", X = 0, Y = 0 };
-            var s4 = new Station { IdStation = 4, Name = "Podbara", Address = "Kosovska", X = 0, Y = 0 };
-            var s5 = new Station { IdStation = 5, Name = "Liman", Address = "Vojvodjanskih brigada", X = 0, Y = 0 };
+            var s1 = new Station { IdStation = 1, Name = "Elektrovojvodina", Address = "Bulevar oslobodjenja 100", X = 45.24549443049722, Y = 19.840106964111328 };
+            var s2 = new Station { IdStation = 2, Name = "Merkator", Address = "Cara lazara 51", X = 45.24300160275933, Y = 19.84081506729126 };
+            var s3 = new Station { IdStation = 3, Name = "Most slobode", Address = "Bulevar oslobodjenja 143", X = 45.2406748648461, Y = 19.843926429748535 };
+            var s4 = new Station { IdStation = 4, Name = "Jugodrvo", Address = "Bulevar oslobodjenja 133", X = 45.24217819017106, Y = 19.84303593635559 };
+            var s5 = new Station { IdStation = 5, Name = "FTN", Address = "	Trg Dositeja Obradovica 6", X = 45.24610628967663, Y = 19.851694107055664 };
+            var s6 = new Station { IdStation = 6, Name = "SPC Vojvodina", Address = "Sutjeska 2", X = 45.24695985999101, Y = 19.84529972076416 };
+            var s7 = new Station { IdStation = 7, Name = "Karadjordjev Stadion", Address = "Dimitrija Tucovica 1", X = 45.24689943065613, Y = 19.842188358306885 };
+            var s8 = new Station { IdStation = 8, Name = "Zeleznicka stanica", Address = "Bulevar Jase Tomica 4", X = 45.265493524101366, Y = 19.82954978942871 };
 
             context.Stations.AddOrUpdate(s => s.IdStation, s1);
             context.Stations.AddOrUpdate(s => s.IdStation, s2);
             context.Stations.AddOrUpdate(s => s.IdStation, s3);
             context.Stations.AddOrUpdate(s => s.IdStation, s4);
             context.Stations.AddOrUpdate(s => s.IdStation, s5);
+            context.Stations.AddOrUpdate(s => s.IdStation, s6);
+            context.Stations.AddOrUpdate(s => s.IdStation, s7);
+            context.Stations.AddOrUpdate(s => s.IdStation, s8);
 
             context.SaveChanges();
 
@@ -71,11 +76,11 @@ namespace WebApp.Migrations
             context.Lines.AddOrUpdate(r => r.IdLine, r5);
             context.SaveChanges();
 
-            var sc1 = new Schadule { IdSchadule = 1, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Suburban,  DepartureTime = "07-07:10|07:45-08:00|08:45-09:00" };
-            var sc2 = new Schadule { IdSchadule = 2, Day = Enums.DayType.Workday, Type = Enums.RouteType.Town,  DepartureTime = "10:15-10:45|10:30-11:00" };
-            var sc3 = new Schadule { IdSchadule = 3, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Suburban,  DepartureTime = "14-14:10|15:15-16:05" };
-            var sc4 = new Schadule { IdSchadule = 4, Day = Enums.DayType.Workday, Type = Enums.RouteType.Suburban,  DepartureTime = "17-17:10|17:15-18:05" };
-            var sc5 = new Schadule { IdSchadule = 5, Day = Enums.DayType.Workday, Type = Enums.RouteType.Town,  DepartureTime = "14-14:10|15:15-16:05" };
+            var sc1 = new Schadule { IdSchadule = 1, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Suburban, DepartureTime = "28.8.2019 15:45:00" };
+            var sc2 = new Schadule { IdSchadule = 2, Day = Enums.DayType.Workday, Type = Enums.RouteType.Town, DepartureTime = "28.8.2019 00:00:00" };
+            var sc3 = new Schadule { IdSchadule = 3, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Suburban, DepartureTime = "28.8.2019 16:35:00" };
+            var sc4 = new Schadule { IdSchadule = 4, Day = Enums.DayType.Workday, Type = Enums.RouteType.Town, DepartureTime = "28.8.2019 08:15:00" };
+            var sc5 = new Schadule { IdSchadule = 5, Day = Enums.DayType.Weekend, Type = Enums.RouteType.Town, DepartureTime = "28.8.2019 06:45:00" };
 
             context.Schadules.AddOrUpdate(sc => sc.IdSchadule, sc1);
             context.Schadules.AddOrUpdate(sc => sc.IdSchadule, sc2);
