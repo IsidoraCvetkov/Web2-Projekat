@@ -401,7 +401,7 @@ namespace WebApp.Controllers
             }
 
             UserManager.AddToRole(user.Id, "AppUser");
-            SendMail(model.Email, $"Your varification status of profile is : " + model.State.ToString() + ".");
+            //SendMail(model.Email, $"Your varification status of profile is : " + model.State.ToString() + ".");
 
             return Ok();
         }

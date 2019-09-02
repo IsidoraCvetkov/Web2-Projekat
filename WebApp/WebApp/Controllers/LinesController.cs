@@ -196,7 +196,7 @@ namespace WebApp.Controllers
             {
                 day = Enums.DayType.Workday;
             }
-            else if (typeOfDay == "Suburban")
+            else if (typeOfDay == "Weekend")
             {
                 day = Enums.DayType.Weekend;
             }
@@ -210,15 +210,17 @@ namespace WebApp.Controllers
                     foreach (var dep in line.Schadules)
                     {
                         //  Day day = db.Days.GetAll().FirstOrDefault(u => u.IDDay == dep.IDDay);
-
-                        ScheduleLine sl = new ScheduleLine();
-                        sl.Number = line.Number;
-                        sl.Time = DateTime.Parse(dep.DepartureTime);
-                        if (dep.Day == DayType.Weekend)
-                            sl.Day = "Weekend";
-                        else if (true)
-                            sl.Day = "Work day";
-                        schedule.Add(sl);
+                        if(day == dep.Day)
+                        {
+                            ScheduleLine sl = new ScheduleLine();
+                            sl.Number = line.Number;
+                            sl.Time = DateTime.Parse(dep.DepartureTime);
+                            if (dep.Day == DayType.Weekend)
+                                sl.Day = "Weekend";
+                            else if (true)
+                                sl.Day = "Work day";
+                            schedule.Add(sl);
+                        } 
                     }
                 }
             }
